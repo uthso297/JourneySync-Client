@@ -12,7 +12,8 @@ const Cover = () => {
                 backgroundImage: `url(${coverImg})`,
             }}>
             <div className="hero-overlay bg-opacity-60"></div>
-            <div className="hero-content text-neutral-content text-left absolute md:left-80">
+            <div className="hero-content text-white text-left absolute md:left-80"> 
+                {/* text-neutral-content */}
                 <div className="max-w-2xl">
                     <motion.h1
                         animate={{ y: ["-100vh", 0] }}
