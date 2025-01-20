@@ -1,0 +1,37 @@
+[
+    {
+        "packageId": 1,
+        "photo": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/9b/09/8a/sundarban-beauty.jpg?w=700&h=500&s=1",
+        "tourType": "Nature & Wildlife",
+        "tripTitle": "Sundarbans Wildlife Safari",
+        "price": "25000"
+    },
+    {
+        "packageId": 2,
+        "photo": "https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/blogiJR0K1sWVNFzinGC_l4r3IdsVLyxZfkr.jpg",
+        "tourType": "Beach & Relaxation",
+        "tripTitle": "Cox's Bazar Beach Vacation",
+        "price": "15000"
+    },
+    {
+        "packageId": 3,
+        "photo": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/62/0f/38/caption.jpg?w=500&h=400&s=1",
+        "tourType": "Cultural & Historical",
+        "tripTitle": "Sylhet Cultural Tour",
+        "price": "12000"
+    },
+    {
+        "packageId": 4,
+        "photo": "https://pathfriend-bd.com/wp-content/uploads/2019/08/chittagong-hill-tracts-photo.gif",
+        "tourType": "Adventure & Nature",
+        "tripTitle": "Rangamati Hill Tract Adventure",
+        "price": "18000"
+    },
+    {
+        "packageId": 5,
+        "photo": "https://travelsetu.com/apps/uploads/new_destinations_photos/destination/2024/06/29/78e6286fa821917616d8cc7b9f4748c0_1000x1000.jpg",
+        "tourType": "Historical & Archaeological",
+        "tripTitle": "Paharpur Ancient Ruins Tour",
+        "price": "10000"
+    }
+]
