@@ -1,4 +1,6 @@
 import Cover from "../../../Shared/Cover/Cover";
+import Blog from "../Blog Section/Blog";
+import Embark from "../EmbarkJourneySection/Embark";
 import OverviewSection from "../OverView/OverviewSection";
 import PackageGuideHome from "../PackageAndGuideSection/PackageAndGuide/PackageGuideHome";
 import TouristStoryHome from "../TouristStory/TouristStoryHome";
@@ -10,6 +12,8 @@ const Home = () => {
             <OverviewSection></OverviewSection>
             <PackageGuideHome></PackageGuideHome>
             <TouristStoryHome></TouristStoryHome>
+            <Blog></Blog>
+            <Embark></Embark>
         </div>
     );
 };
