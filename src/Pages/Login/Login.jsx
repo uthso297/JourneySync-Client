@@ -1,8 +1,29 @@
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
+import PageTitle from "../../Components/PageTitle";
+import { useContext } from "react";
+import { AuthContext } from "../../Components/AuthProvider";
 const Login = () => {
+    const { signIn } = useContext(AuthContext)
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const form = e.target
+        const email = form.email.value
+        const password = form.password.value
+        console.log(email, password);
+        signIn(email, password)
+            .then(res => {
+                console.log(res);
+                form.reset();
+            })
+    };
+    const handleGoogle = () => {
+        console.log('gooogle is coming');
+    }
+
     return (
         <div className="flex flex-col-reverse md:flex-row h-screen">
+            <PageTitle title="Login || JourneySync"></PageTitle>
             {/* Left Section */}
             <motion.div
                 animate={{ x: [-50, 0] }}
@@ -13,6 +34,7 @@ const Login = () => {
                     Log in to your account to explore new destinations, book trips, and manage your bookings.
                 </p>
                 <button
+                    onClick={handleGoogle}
                     className="flex items-center justify-center border rounded-md py-2 px-4 mb-6 text-gray-700 border-gray-300 hover:bg-gray-100"
                 >
                     <img
@@ -27,15 +49,17 @@ const Login = () => {
                     <span className="mx-4 text-gray-500">or</span>
                     <div className="flex-grow border-t border-gray-300"></div>
                 </div>
-                <form className="flex flex-col space-y-4">
+                <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
                     <input
                         type="email"
                         placeholder="Email address"
+                        name="email"
                         className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
                     <input
                         type="password"
                         placeholder="Password"
+                        name="password"
                         className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
 

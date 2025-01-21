@@ -5,7 +5,7 @@ import PageTitle from '../../Components/PageTitle';
 const About = () => {
     return (
         <div className="bg-gray-50 min-h-screen flex justify-center items-center py-12 px-6">
-            <PageTitle title="Home || About"></PageTitle>
+            <PageTitle title="About || JourneySync"></PageTitle>
             <div className="bg-white rounded-lg shadow-lg max-w-3xl w-full overflow-hidden">
                 <div className="flex justify-center py-8 bg-blue-500 text-white">
                     <h1 className="text-3xl font-semibold">About Md. Sihab Mahmud Uthso</h1>

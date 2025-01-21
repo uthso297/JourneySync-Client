@@ -1,9 +1,58 @@
 import { motion } from "motion/react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import PageTitle from "../../Components/PageTitle";
+import { AuthContext } from "../../Components/AuthProvider";
 
 const SignUp = () => {
+    const { createUser, updateUserProfile, googleSignIn } = useContext(AuthContext)
+    const [passwordError, setPasswordError] = useState('');
+
+    const validatePassword = (password) => {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/;
+
+        if (!regex.test(password)) {
+            setPasswordError('Password must be between 6-20 characters, with at least one uppercase letter, one lowercase letter, one number, and one special character.');
+            return false;
+        }
+        setPasswordError('');
+        return true;
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const form = e.target
+        const name = form.name.value
+        const email = form.email.value
+        const image = form.image.value
+        const password = form.password.value
+        console.log(name, email, password, image);
+        if (validatePassword(password)) {
+            createUser(email, password)
+                .then(result => {
+                    updateUserProfile(name, image)
+                    console.log(result.user);
+                    form.reset();
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        } else {
+            console.log('Password is invalid');
+        }
+
+    };
+
+    const handleGoogle = () => {
+        googleSignIn()
+            .then(result => {
+                console.log(result.user);
+            })
+    }
+
     return (
         <div className="flex flex-col-reverse md:flex-row h-screen">
+            <PageTitle title="SignUp || JourneySync"></PageTitle>
             {/* Left Section */}
             <motion.div
                 animate={{ x: [-50, 0] }}
@@ -14,6 +63,7 @@ const SignUp = () => {
                     Join our community of explorers! Sign up today to start planning your next adventure, receive personalized travel recommendations, and enjoy exclusive offers.
                 </p>
                 <button
+                    onClick={handleGoogle}
                     className="flex items-center justify-center border rounded-md py-2 px-4 mb-6 text-gray-700 border-gray-300 hover:bg-gray-100"
                 >
                     <img
@@ -28,31 +78,41 @@ const SignUp = () => {
                     <span className="mx-4 text-gray-500">or</span>
                     <div className="flex-grow border-t border-gray-300"></div>
                 </div>
-                <form className="flex flex-col space-y-4">
+                <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
                     <input
                         type="text"
                         placeholder="Name"
+                        name="name"
+                        required
                         className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
                     <input
                         type="text"
                         placeholder="Image Link"
+                        name="image"
+                        required
                         className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
                     <input
                         type="email"
                         placeholder="Email address"
+                        name="email"
+                        required
                         className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
                     <input
                         type="password"
                         placeholder="Password"
+                        name="password"
+                        required
                         className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
+                    {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
                     <div className="flex items-center">
                         <input
                             type="checkbox"
                             id="guidelines"
+                            required
                             className="h-4 w-4 text-green-500 border-gray-300 rounded focus:ring-green-500"
                         />
                         <label htmlFor="guidelines" className="ml-2 text-gray-600 text-sm md:text-base">
