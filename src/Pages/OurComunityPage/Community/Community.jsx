@@ -1,6 +1,7 @@
 import PageTitle from "../../../Components/PageTitle";
 import CoverWithVideo from "../Cover/CoverWithVideo";
 import Description from "../Description/Description";
+import Involve from "../HowToInvolve/Involve";
 import Stories from "../Stories/Stories";
 
 
@@ -12,6 +13,7 @@ const Community = () => {
             <CoverWithVideo></CoverWithVideo>
             <Description></Description>
             <Stories></Stories>
+            <Involve></Involve>
         </div>
     );
 };
