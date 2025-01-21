@@ -6,7 +6,7 @@ const Navbar = () => {
         <li>
             <Link to='/community'>Community</Link>
         </li>
-        <li><a>About Us</a></li>
+        <li><Link to='/about'>About Us</Link></li>
         <li><a>Trips</a></li>
 
     </>
