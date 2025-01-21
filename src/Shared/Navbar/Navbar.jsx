@@ -12,6 +12,7 @@ const Navbar = () => {
     </>
 
     const authLinks = <>
+        <li><Link to="/dashboard">Dashboard</Link></li>
         <li><a>Login</a></li>
         <li><a>Register</a></li>
     </>

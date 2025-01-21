@@ -7,6 +7,7 @@ import Home from "../Pages/Home/Home/Home";
 import Community from "../Pages/OurComunityPage/Community/Community";
 import About from "../Pages/About/About";
 import Trips from "../Pages/AllTrips/Trips/Trips";
+import Dashboard from "../Lauouts/Dashboard";
 
 export const router = createBrowserRouter([
     {
@@ -31,4 +32,12 @@ export const router = createBrowserRouter([
             }
         ]
     },
+    {
+        path: 'dashboard',
+        element: <Dashboard></Dashboard>,
+        children: [
+        // tourist
+
+        ]
+    }
 ]);
