@@ -1,3 +1,4 @@
+import PageTitle from "../../../Components/PageTitle";
 import Cover from "../../../Shared/Cover/Cover";
 import Blog from "../Blog Section/Blog";
 import Embark from "../EmbarkJourneySection/Embark";
@@ -8,6 +9,7 @@ import TouristStoryHome from "../TouristStory/TouristStoryHome";
 const Home = () => {
     return (
         <div>
+            <PageTitle title="Home || JourneySync"></PageTitle>
             <Cover></Cover>
             <OverviewSection></OverviewSection>
             <PackageGuideHome></PackageGuideHome>
