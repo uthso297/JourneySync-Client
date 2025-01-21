@@ -8,6 +8,8 @@ import Community from "../Pages/OurComunityPage/Community/Community";
 import About from "../Pages/About/About";
 import Trips from "../Pages/AllTrips/Trips/Trips";
 import Dashboard from "../Lauouts/Dashboard";
+import Login from "../Pages/Login/Login";
+import SignUp from "../Pages/SignUp/SignUp";
 
 export const router = createBrowserRouter([
     {
@@ -29,6 +31,14 @@ export const router = createBrowserRouter([
             {
                 path: 'trips',
                 element: <Trips></Trips>
+            },
+            {
+                path: 'login',
+                element: <Login></Login>
+            },
+            {
+                path: 'signup',
+                element: <SignUp></SignUp>
             }
         ]
     },

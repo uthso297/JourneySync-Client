@@ -13,8 +13,8 @@ const Navbar = () => {
 
     const authLinks = <>
         <li><Link to="/dashboard">Dashboard</Link></li>
-        <li><a>Login</a></li>
-        <li><a>Register</a></li>
+        <li><Link to="/login">Login</Link></li>
+        <li><Link to="/signup">Register</Link></li>
     </>
     return (
         <div className="navbar fixed z-10 bg-black bg-opacity-20">
