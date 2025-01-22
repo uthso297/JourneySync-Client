@@ -27,7 +27,7 @@ function TouristSlider() {
                     {story.map((tourist, index) => (
                         <div key={index} className="w-full flex-shrink-0 p-4">
                             <img src={tourist.image} alt={tourist.title} className="w-full h-48 object-cover rounded-md" />
-                            <h3 className="mt-6 text-lg font-semibold">{tourist.title}</h3>
+                            <h3 className="mt-8 text-lg font-semibold">{tourist.title}</h3>
                             <p className="text-sm text-gray-600">{tourist.description}</p>
                         </div>
                     ))}
@@ -35,14 +35,14 @@ function TouristSlider() {
             </div>
 
             <button
-                className="absolute top-1/2 md:-left-6 -left-4 transform -translate-y-1/2 text-white bg-black p-2 rounded-full"
+                className="absolute top-52 md:top-1/2 md:-left-6 left-2 transform -translate-y-1/2 text-white bg-black p-2 rounded-full"
                 onClick={prevSlide}
             >
                 &#8592;
             </button>
 
             <button
-                className="absolute top-1/2 md:-right-6 -right-4 transform -translate-y-1/2 text-white bg-black p-2 rounded-full"
+                className="absolute top-52 md:top-1/2 md:-right-6 right-2 transform -translate-y-1/2 text-white bg-black p-2 rounded-full"
                 onClick={nextSlide}
             >
                 &#8594;

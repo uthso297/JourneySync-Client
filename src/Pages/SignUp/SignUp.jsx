@@ -51,13 +51,13 @@ const SignUp = () => {
     }
 
     return (
-        <div className="flex flex-col-reverse md:flex-row h-screen">
+        <div className="flex flex-col-reverse md:flex-row min-h-screen">
             <PageTitle title="SignUp || JourneySync"></PageTitle>
             {/* Left Section */}
             <motion.div
                 animate={{ x: [-50, 0] }}
                 transition={{ duration: 2, ease: "easeOut" }}
-                className="w-full md:w-1/2 bg-white flex flex-col justify-center px-6 md:px-12">
+                className="w-full md:w-1/2 bg-white flex flex-col justify-center px-6 md:px-12 p-16">
                 <h1 className="text-3xl md:text-4xl font-bold mb-4">Welcome, Traveler!</h1>
                 <p className="text-gray-600 mb-8 text-sm md:text-base">
                     Join our community of explorers! Sign up today to start planning your next adventure, receive personalized travel recommendations, and enjoy exclusive offers.

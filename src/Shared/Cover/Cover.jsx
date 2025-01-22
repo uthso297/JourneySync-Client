@@ -20,7 +20,7 @@ const Cover = () => {
                     <motion.h1
                         animate={{ y: ["-100vh", 0] }}
                         transition={{ duration: 3, ease: "easeOut" }}
-                        className="mb-5 text-3xl sm:text-5xl font-bold text-left"
+                        className="mb-5 text-2xl sm:text-5xl font-bold text-left"
                     >
                         Explore the world
                     </motion.h1>
@@ -31,14 +31,14 @@ const Cover = () => {
                             initial={{ opacity: 0.2 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.5, duration: 3, ease: "easeOut" }}
-                            className="btn bg-inherit sm:btn-md lg:btn-lg text-white"
+                            className="btn btn-sm bg-inherit  sm:btn-md lg:btn-lg text-white"
                         >
                             Get Started
                         </motion.button>
                         <motion.h1
                             animate={{ y: ["-100vh", 0] }}
                             transition={{ duration: 3, ease: "easeOut" }}
-                            className="mb-5 text-3xl sm:text-5xl font-bold text-center sm:ml-4"
+                            className="mb-5 text-2xl sm:text-5xl font-bold text-center sm:ml-4"
                         >
                             Make a difference
                         </motion.h1>

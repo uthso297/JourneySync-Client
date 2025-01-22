@@ -13,7 +13,7 @@ const Grid = () => {
         {
             title: "Select Packages",
             description: "Choose from a variety of carefully curated packages tailored to meet your needs.",
-            imageUrl: "https://thumbs.dreamstime.com/b/time-to-travel-wooden-sign-beach-background-49509295.jpg",
+            imageUrl: "https://i.ibb.co.com/wL9WBFY/time-to-travel-wooden-sign-beach-background-49509295.webp",
         },
         {
             title: "Add Your Story",

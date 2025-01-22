@@ -1,21 +1,43 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Components/AuthProvider";
 
 const Navbar = () => {
-    const links = <>
-        <li><Link to='/'>Home</Link></li>
-        <li>
-            <Link to='/community'>Community</Link>
-        </li>
-        <li><Link to='/about'>About Us</Link></li>
-        <li><Link to="/trips">Trips</Link></li>
 
-    </>
+    const { user } = useContext(AuthContext)
 
-    const authLinks = <>
-        <li><Link to="/dashboard">Dashboard</Link></li>
-        <li><Link to="/login">Login</Link></li>
-        <li><Link to="/signup">Register</Link></li>
-    </>
+    const links =
+        <>
+            <li><Link to='/'>Home</Link></li>
+            <li>
+                <Link to='/community'>Community</Link>
+            </li>
+            <li><Link to='/about'>About Us</Link></li>
+            <li><Link to="/trips">Trips</Link></li>
+        </>
+
+    const authLinks =
+        <>
+
+            <li className="text-sm md:text-lg"><Link to="/login">Login</Link></li>
+            <li className="text-sm md:text-lg"><Link to="/signup">Register</Link></li>
+
+        </>
+
+    const dropDown =
+        <>
+            <div className="dropdown dropdown-bottom dropdown-end">
+                <div tabIndex={0} role="button" className="">
+                    <img className="w-10 h-10 rounded-full" src={user?.photoURL} alt="" />
+                </div>
+                <ul tabIndex={0} className="dropdown-content menu bg-gray-700 rounded-box z-[1] w-52 p-2 shadow">
+                    <li className="text-sm md:text-lg"><Link to="/dashboard">Dashboard</Link></li>
+                    <li className="text-sm md:text-lg"><Link to="/dashboard">Offer Anouncement</Link></li>
+                    <li className="text-sm md:text-lg">{user?.displayName}</li>
+                    <li className="text-sm md:text-lg">{user?.email}</li>
+                </ul>
+            </div>
+        </>
     return (
         <div className="navbar fixed z-10 bg-black bg-opacity-20">
             <div className="navbar-start">
@@ -54,7 +76,7 @@ const Navbar = () => {
             <div className="navbar-end">
                 <ul className="flex justify-center items-center gap-3 text-white text-lg">
                     {
-                        authLinks
+                        user ? dropDown : authLinks
                     }
                 </ul>
             </div>
