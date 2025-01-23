@@ -1,10 +1,11 @@
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import PageTitle from "../../Components/PageTitle";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Components/AuthProvider";
 const Login = () => {
     const { signIn, googleSignIn, resetPassword } = useContext(AuthContext)
+    const [isOpen, setIsOpen] = useState(false);
     const handleSubmit = (e) => {
         e.preventDefault()
         const form = e.target
@@ -88,45 +89,52 @@ const Login = () => {
                         Sign in
                     </button>
                 </form>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between py-4">
                     <p className="mt-4 text-sm text-gray-500">
                         Do not an account? <Link to="/signup" className="text-green-500">Sign Up</Link>
                     </p>
-                    {/* <div className="mt-4 text-sm">
-                        <button className="text-green-500" onClick={() => document.getElementById('my_modal_3').showModal()}>Forgot password?</button>
-                        <dialog id="my_modal_3" className="modal">
-                            <div className="modal-box">
-                                <h3 className="font-bold text-lg">Hello!</h3>
-                                <p className="py-4">Enter your email to send password reset link?</p>
-                                <form onSubmit={handleForget} method="dialog">
-                                    <div className="flex items-center gap-4">
+
+                    <div className="flex justify-center items-center mt-4">
+                        <button
+                            onClick={() => setIsOpen(true)}
+                            className="btn bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md"
+                        >
+                            Forgot password?
+                        </button>
+
+                        {isOpen && (
+                            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                                <div className="bg-white rounded-lg w-11/12 md:w-1/3 p-6 relative shadow-lg">
+                                    <button
+                                        onClick={() => setIsOpen(false)}
+                                        className="absolute top-3 right-3 text-gray-500 hover:text-black"
+                                    >
+                                        ✖
+                                    </button>
+                                    <h2 className="text-lg md:text-xl font-bold text-gray-800 mb-4">
+                                        Enter email to send password reset link
+                                    </h2>
+                                    <form onSubmit={handleForget} className="space-y-4">
                                         <input
                                             type="email"
                                             placeholder="Email address"
                                             name="email"
-
-                                            className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500 flex-1"
+                                            required
+                                            className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500"
                                         />
-                                        <p type="submit" className="px-5 py-3 bg-green-500 rounded-lg btn">Send</p>
-                                    </div>
-                                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                                </form>
-
+                                        <button
+                                            type="submit"
+                                            className="w-full btn bg-green-500 hover:bg-green-600 text-white py-2 rounded-md"
+                                        >
+                                            Submit
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
-                        </dialog>
-                    </div> */}
-                    <div>
-                        <form onSubmit={handleForget}>
-                            <input
-                                type="email"
-                                placeholder="Email address"
-                                name="email"
-                                required
-                                className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500"
-                            />
-                            <button className="btn">Submit</button>
-                        </form>
+                        )}
                     </div>
+
+
 
                 </div>
             </motion.div>
