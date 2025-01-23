@@ -4,7 +4,7 @@ import PageTitle from "../../Components/PageTitle";
 import { useContext } from "react";
 import { AuthContext } from "../../Components/AuthProvider";
 const Login = () => {
-    const { signIn } = useContext(AuthContext)
+    const { signIn, googleSignIn, resetPassword } = useContext(AuthContext)
     const handleSubmit = (e) => {
         e.preventDefault()
         const form = e.target
@@ -18,7 +18,23 @@ const Login = () => {
             })
     };
     const handleGoogle = () => {
-        console.log('gooogle is coming');
+        googleSignIn()
+            .then(result => {
+                console.log(result.user);
+            })
+    }
+
+    const handleForget = (e) => {
+        e.preventDefault();
+        const email = e.target.email.value
+        // console.log(email);
+        resetPassword(email)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err.message);
+            })
     }
 
     return (
@@ -54,12 +70,14 @@ const Login = () => {
                         type="email"
                         placeholder="Email address"
                         name="email"
+                        required
                         className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
                     <input
                         type="password"
                         placeholder="Password"
                         name="password"
+                        required
                         className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
 
@@ -70,9 +88,47 @@ const Login = () => {
                         Sign in
                     </button>
                 </form>
-                <p className="mt-4 text-sm text-gray-500">
-                    Do not an account? <Link to="/signup" className="text-green-500">Sign Up</Link>
-                </p>
+                <div className="flex items-center justify-between">
+                    <p className="mt-4 text-sm text-gray-500">
+                        Do not an account? <Link to="/signup" className="text-green-500">Sign Up</Link>
+                    </p>
+                    {/* <div className="mt-4 text-sm">
+                        <button className="text-green-500" onClick={() => document.getElementById('my_modal_3').showModal()}>Forgot password?</button>
+                        <dialog id="my_modal_3" className="modal">
+                            <div className="modal-box">
+                                <h3 className="font-bold text-lg">Hello!</h3>
+                                <p className="py-4">Enter your email to send password reset link?</p>
+                                <form onSubmit={handleForget} method="dialog">
+                                    <div className="flex items-center gap-4">
+                                        <input
+                                            type="email"
+                                            placeholder="Email address"
+                                            name="email"
+
+                                            className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500 flex-1"
+                                        />
+                                        <p type="submit" className="px-5 py-3 bg-green-500 rounded-lg btn">Send</p>
+                                    </div>
+                                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                </form>
+
+                            </div>
+                        </dialog>
+                    </div> */}
+                    <div>
+                        <form onSubmit={handleForget}>
+                            <input
+                                type="email"
+                                placeholder="Email address"
+                                name="email"
+                                required
+                                className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500"
+                            />
+                            <button className="btn">Submit</button>
+                        </form>
+                    </div>
+
+                </div>
             </motion.div>
 
             {/* Right Section */}
@@ -92,6 +148,9 @@ const Login = () => {
                     </p>
                 </div>
             </motion.div>
+
+
+
         </div>
     );
 };

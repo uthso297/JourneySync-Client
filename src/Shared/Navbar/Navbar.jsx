@@ -4,7 +4,17 @@ import { AuthContext } from "../../Components/AuthProvider";
 
 const Navbar = () => {
 
-    const { user } = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
+
+    const handleLogout = () => {
+        logOut()
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     const links =
         <>
@@ -26,16 +36,22 @@ const Navbar = () => {
 
     const dropDown =
         <>
-            <div className="dropdown dropdown-bottom dropdown-end">
-                <div tabIndex={0} role="button" className="">
-                    <img className="w-10 h-10 rounded-full" src={user?.photoURL} alt="" />
+            <div className="flex items-center flex-row-reverse gap-5">
+                <div>
+                    <button onClick={handleLogout} className="btn"> Logout </button>
                 </div>
-                <ul tabIndex={0} className="dropdown-content menu bg-gray-700 rounded-box z-[1] w-52 p-2 shadow">
-                    <li className="text-sm md:text-lg"><Link to="/dashboard">Dashboard</Link></li>
-                    <li className="text-sm md:text-lg"><Link to="/dashboard">Offer Anouncement</Link></li>
-                    <li className="text-sm md:text-lg">{user?.displayName}</li>
-                    <li className="text-sm md:text-lg">{user?.email}</li>
-                </ul>
+
+                <div className="dropdown dropdown-bottom dropdown-end">
+                    <div tabIndex={0} role="button" className="">
+                        <img className="w-10 h-10 rounded-full" src={user?.photoURL} />
+                    </div>
+                    <ul tabIndex={0} className="dropdown-content menu bg-gray-700 rounded-box z-[1] w-52 p-2 shadow">
+                        <li className="text-sm md:text-md"><Link to="/dashboard">Dashboard</Link></li>
+                        <li className="text-sm md:text-md"><Link to="/dashboard">Offer Anouncement</Link></li>
+                        <li className="text-sm md:text-md">{user?.displayName}</li>
+                        <li className="text-sm md:text-md">{user?.email}</li>
+                    </ul>
+                </div>
             </div>
         </>
     return (
