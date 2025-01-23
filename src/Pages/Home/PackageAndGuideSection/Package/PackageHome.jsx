@@ -1,21 +1,37 @@
-import { div } from "motion/react-client";
 import { useEffect, useState } from "react";
 import SectionTitle from "../../../../Components/SectionTitle";
+import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import { BallTriangle } from "react-loader-spinner";
 
 const PackageHome = () => {
     const [packages, setPackages] = useState([])
+    const [loading, setLoading] = useState(true)
+    const axiosPublic = useAxiosPublic();
     useEffect(() => {
-        fetch('tourPackages.json')
-            .then(res => res.json())
-            .then(data => {
-                setPackages(data);
+        axiosPublic.get('/tourPackages/random')
+            .then(res => {
+                setPackages(res.data)
+                setLoading(false)
             })
     }, [])
-    return (
 
+    if (loading) {
+        return <BallTriangle
+            height={100}
+            width={100}
+            radius={5}
+            color="#4fa94d"
+            ariaLabel="ball-triangle-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+        />
+    }
+
+    return (
         <div>
             <SectionTitle heading={'Explore Our Exciting Tour Packages'} description={'Discover a variety of tailor-made tour packages designed to give you a memorable adventure. From nature and wildlife safaris to relaxing beach vacations and historical explorations, we offer experiences that cater to every travelers interests. Our packages are thoughtfully curated to ensure you enjoy the best of each destination, guided by experts who are passionate about sharing their knowledge.'}></SectionTitle>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
 
                 {packages.map(pkg => (
                     <div key={pkg.packageId} className="card card-compact bg-base-100 shadow-xl">
@@ -38,9 +54,11 @@ const PackageHome = () => {
                 ))}
             </div>
         </div>
-    );
+    )
 };
 
 export default PackageHome;
+
+
 
 
