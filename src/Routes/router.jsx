@@ -12,6 +12,12 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import PackageDetails from "../Pages/PackageDetails/PkgDetails/PackageDetails";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import UserProfile from "../Pages/Dashboard/UserDashboard/ManageProfiePage/userProfile";
+import Bookings from "../Pages/Dashboard/UserDashboard/MyBookingsPage/Bookings";
+import ManageStoriesUser from "../Pages/Dashboard/UserDashboard/ManageStoriesPage/ManageStoriesUser";
+import AddStoriesUser from "../Pages/Dashboard/UserDashboard/AddStoriesPage/AddStoriesUser";
+import JoinGuide from "../Pages/Dashboard/UserDashboard/JoinAsGuidePage/JoinGuide";
+
 
 export const router = createBrowserRouter([
     {
@@ -59,7 +65,26 @@ export const router = createBrowserRouter([
         element: <Dashboard></Dashboard>,
         children: [
             // tourist
-
+            {
+                path: 'userProfile',
+                element: <UserProfile></UserProfile>
+            },
+            {
+                path: 'mybookings',
+                element: <Bookings></Bookings>
+            },
+            {
+                path: 'managestory',
+                element: <ManageStoriesUser></ManageStoriesUser>
+            },
+            {
+                path: 'addstory',
+                element: <AddStoriesUser></AddStoriesUser>
+            },
+            {
+                path: 'joinguide',
+                element: <JoinGuide></JoinGuide>
+            }
         ]
     }
 ]);

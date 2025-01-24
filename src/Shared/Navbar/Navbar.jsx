@@ -46,7 +46,7 @@ const Navbar = () => {
                         <img className="w-10 h-10 rounded-full" src={user?.photoURL} />
                     </div>
                     <ul tabIndex={0} className="dropdown-content menu bg-gray-700 rounded-box z-[1] w-52 p-2 shadow">
-                        <li className="text-sm md:text-md"><Link to="/dashboard">Dashboard</Link></li>
+                        <li className="text-sm md:text-md"><Link to="/dashboard/userProfile">Dashboard</Link></li>
                         <li className="text-sm md:text-md"><Link to="/dashboard">Offer Anouncement</Link></li>
                         <li className="text-sm md:text-md">{user?.displayName}</li>
                         <li className="text-sm md:text-md">{user?.email}</li>
