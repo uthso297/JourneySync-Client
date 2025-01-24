@@ -10,6 +10,8 @@ import Trips from "../Pages/AllTrips/Trips/Trips";
 import Dashboard from "../Lauouts/Dashboard";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
+import PackageDetails from "../Pages/PackageDetails/PkgDetails/PackageDetails";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export const router = createBrowserRouter([
     {
@@ -39,14 +41,24 @@ export const router = createBrowserRouter([
             {
                 path: 'signup',
                 element: <SignUp></SignUp>
+            },
+            {
+                path: '/tourPackages/:id',
+                element: <PackageDetails />,
+                loader: async ({ params }) => {
+                    const axiosPublic = useAxiosPublic();
+                    const res = await axiosPublic.get(`/tourPackages/${params.id}`);
+                    return { package: res.data };
+                }
             }
+
         ]
     },
     {
         path: 'dashboard',
         element: <Dashboard></Dashboard>,
         children: [
-        // tourist
+            // tourist
 
         ]
     }

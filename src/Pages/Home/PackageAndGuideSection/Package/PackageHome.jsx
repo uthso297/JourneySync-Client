@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import SectionTitle from "../../../../Components/SectionTitle";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import { BallTriangle } from "react-loader-spinner";
+import { Link } from "react-router-dom";
+
 
 const PackageHome = () => {
     const [packages, setPackages] = useState([])
     const [loading, setLoading] = useState(true)
     const axiosPublic = useAxiosPublic();
     useEffect(() => {
+
         axiosPublic.get('/tourPackages/random')
             .then(res => {
                 setPackages(res.data)
@@ -16,16 +19,18 @@ const PackageHome = () => {
     }, [])
 
     if (loading) {
-        return <BallTriangle
-            height={100}
-            width={100}
-            radius={5}
-            color="#4fa94d"
-            ariaLabel="ball-triangle-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-        />
+        return <div className="flex justify-center items-center">
+            <BallTriangle
+                height={100}
+                width={100}
+                radius={5}
+                color="#4fa94d"
+                ariaLabel="ball-triangle-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+            />
+        </div>
     }
 
     return (
@@ -34,12 +39,12 @@ const PackageHome = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
 
                 {packages.map(pkg => (
-                    <div key={pkg.packageId} className="card card-compact bg-base-100 shadow-xl">
+                    <div key={pkg._id} className="card card-compact bg-base-100 shadow-xl">
                         <figure>
                             <img
-                                src={pkg.photo}
+                                src={pkg.photos[0]}
                                 alt={pkg.tripTitle}
-                                className="w-full h-48 object-cover rounded-t-lg"
+                                className="w-full h-96 rounded-t-lg"
                             />
                         </figure>
                         <div className="card-body">
@@ -47,7 +52,7 @@ const PackageHome = () => {
                             <p className="text-sm text-gray-500">{pkg.tourType}</p>
                             <p className="text-xl font-semibold text-primary">${pkg.price}</p>
                             <div className="card-actions justify-end">
-                                <button className="btn btn-primary">Book Now</button>
+                                <Link to={`/tourPackages/${pkg._id}`}><button className="btn btn-primary">View Details</button></Link>
                             </div>
                         </div>
                     </div>

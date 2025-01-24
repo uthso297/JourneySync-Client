@@ -25,16 +25,18 @@ const PackagesTrips = () => {
     });
 
     if (loading) {
-        return <BallTriangle
-            height={100}
-            width={100}
-            radius={5}
-            color="#4fa94d"
-            ariaLabel="ball-triangle-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-        />
+        return <div className="flex justify-center items-center">
+            <BallTriangle
+                height={100}
+                width={100}
+                radius={5}
+                color="#4fa94d"
+                ariaLabel="ball-triangle-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+            />
+        </div>
     }
 
     return (
@@ -47,9 +49,9 @@ const PackagesTrips = () => {
                         packages.map(pkg => <div key={pkg.packageId} className="keen-slider__slide number-slide1 shadow-lg">
                             <figure>
                                 <img
-                                    src={pkg.photo}
+                                    src={pkg.photos[5]}
                                     alt={pkg.tripTitle}
-                                    className="w-full h-48 object-cover rounded-t-lg"
+                                    className="w-full h-96 rounded-t-lg"
                                 />
                             </figure>
                             <div className="card-body">
