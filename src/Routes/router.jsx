@@ -17,6 +17,8 @@ import Bookings from "../Pages/Dashboard/UserDashboard/MyBookingsPage/Bookings";
 import ManageStoriesUser from "../Pages/Dashboard/UserDashboard/ManageStoriesPage/ManageStoriesUser";
 import AddStoriesUser from "../Pages/Dashboard/UserDashboard/AddStoriesPage/AddStoriesUser";
 import JoinGuide from "../Pages/Dashboard/UserDashboard/JoinAsGuidePage/JoinGuide";
+import AdminProfile from "../Pages/Dashboard/AdminDashboard/ManageProfile/AdminProfile";
+import ManageCandidate from "../Pages/Dashboard/AdminDashboard/ManageCandidates/ManageCandidate";
 
 
 export const router = createBrowserRouter([
@@ -84,6 +86,16 @@ export const router = createBrowserRouter([
             {
                 path: 'joinguide',
                 element: <JoinGuide></JoinGuide>
+            },
+
+            //
+            {
+                path: 'adminProfile',
+                element: <AdminProfile></AdminProfile>
+            },
+            {
+                path: 'manageCandidates',
+                element: <ManageCandidate></ManageCandidate>
             }
         ]
     }

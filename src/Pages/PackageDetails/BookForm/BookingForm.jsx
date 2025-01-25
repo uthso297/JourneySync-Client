@@ -3,20 +3,23 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { CiCircleCheck } from "react-icons/ci";
 
-const BookingForm = ({ touristName, touristEmail, touristImage, tourGuides, price }) => {
+const BookingForm = ({ touristName, touristEmail, touristImage, tourGuides, price, packageTitle }) => {
     const [startDate, setStartDate] = useState(new Date());
     const [selectedGuide, setSelectedGuide] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleBooking = (e) => {
         e.preventDefault();
+        const status = 'Pending'
         const formData = {
             touristName,
             touristEmail,
             touristImage,
             tourDate: startDate,
             tourGuide: selectedGuide,
-            price
+            price,
+            status,
+            
         };
         console.log('Form Data:', formData);
         setIsModalOpen(true);
@@ -49,7 +52,7 @@ const BookingForm = ({ touristName, touristEmail, touristImage, tourGuides, pric
                     <input
                         type="text"
                         className="mt-2 block w-full p-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none"
-                        value="Amazing European Tour"
+                        value={packageTitle}
                         readOnly
                     />
                 </div>

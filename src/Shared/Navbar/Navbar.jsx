@@ -1,10 +1,13 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Components/AuthProvider";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext)
+
+    const [isAdmin] = useAdmin()
 
     const handleLogout = () => {
         logOut()
@@ -46,8 +49,8 @@ const Navbar = () => {
                         <img className="w-10 h-10 rounded-full" src={user?.photoURL} />
                     </div>
                     <ul tabIndex={0} className="dropdown-content menu bg-gray-700 rounded-box z-[1] w-52 p-2 shadow">
-                        <li className="text-sm md:text-md"><Link to="/dashboard/userProfile">Dashboard</Link></li>
-                        <li className="text-sm md:text-md"><Link to="/dashboard">Offer Anouncement</Link></li>
+                        {user && !isAdmin && <li className="text-sm md:text-md"><Link to="/dashboard/userProfile">Dashboard</Link></li>}
+                        {user && isAdmin && <li className="text-sm md:text-md"><Link to="/dashboard/adminProfile">Dashboard</Link></li>}
                         <li className="text-sm md:text-md">{user?.displayName}</li>
                         <li className="text-sm md:text-md">{user?.email}</li>
                     </ul>

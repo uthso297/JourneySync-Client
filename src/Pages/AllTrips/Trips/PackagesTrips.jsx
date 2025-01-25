@@ -46,7 +46,7 @@ const PackagesTrips = () => {
 
                 <div ref={sliderRef} className="keen-slider" key={packages.length}>
                     {
-                        packages.map(pkg => <div key={pkg.packageId} className="keen-slider__slide number-slide1 shadow-lg">
+                        packages.map(pkg => <div key={pkg._id} className="keen-slider__slide number-slide1 shadow-lg">
                             <figure>
                                 <img
                                     src={pkg.photos[5]}
