@@ -11,7 +11,7 @@ const UserProfile = () => {
     const [photoURL, setPhotoURL] = useState(user?.photoURL || "");
     const axiosSecure = useAxiosSecure();
 
-    const { data: specificUser = {}, error } = useQuery({
+    const { data: specificUser = {}, error, refetch } = useQuery({
         queryKey: ["specificUser"],
         queryFn: async () => {
             const res = await axiosSecure.get(`/users/${user?.email}`);
@@ -23,19 +23,31 @@ const UserProfile = () => {
         console.error("Error fetching user:", error.message);
     }
 
+    console.log(specificUser);
+
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
     const handleSave = async () => {
         try {
-            await updateUserProfile(name, photoURL);
-            alert("Profile updated successfully!");
-            closeModal();
+            
+            await updateUserProfile(name, photoURL)
+                .then(async () => {             
+                    const res = await axiosSecure.patch(`/users/${user?.email}`, { username: name });
+                    if (res.status === 200) {
+                        alert("Profile updated successfully!");
+                        refetch();
+                    } else {
+                        throw new Error("Failed to update username in database");
+                    }
+                    closeModal();
+                });
         } catch (error) {
             console.error("Error updating profile:", error);
             alert("Failed to update profile. Please try again.");
         }
     };
+
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-100">
