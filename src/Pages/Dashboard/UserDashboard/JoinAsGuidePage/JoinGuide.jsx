@@ -1,9 +1,11 @@
 
 
+
 const JoinGuide = () => {
+
     return (
         <div>
-            hi from join guide
+            hi tourguide
         </div>
     );
 };
