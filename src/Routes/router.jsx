@@ -19,6 +19,8 @@ import AddStoriesUser from "../Pages/Dashboard/UserDashboard/AddStoriesPage/AddS
 import JoinGuide from "../Pages/Dashboard/UserDashboard/JoinAsGuidePage/JoinGuide";
 import AdminProfile from "../Pages/Dashboard/AdminDashboard/ManageProfile/AdminProfile";
 import ManageCandidate from "../Pages/Dashboard/AdminDashboard/ManageCandidates/ManageCandidate";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 
 
 export const router = createBrowserRouter([
@@ -52,7 +54,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/tourPackages/:id',
-                element: <PackageDetails />,
+                element: <PrivateRoute><PackageDetails /></PrivateRoute>,
                 loader: async ({ params }) => {
                     const axiosPublic = useAxiosPublic();
                     const res = await axiosPublic.get(`/tourPackages/${params.id}`);
@@ -64,7 +66,7 @@ export const router = createBrowserRouter([
     },
     {
         path: 'dashboard',
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
             // tourist
             {
@@ -91,7 +93,7 @@ export const router = createBrowserRouter([
             //
             {
                 path: 'adminProfile',
-                element: <AdminProfile></AdminProfile>
+                element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>
             },
             {
                 path: 'manageCandidates',

@@ -1,11 +1,14 @@
 import { motion } from "motion/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import PageTitle from "../../Components/PageTitle";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Components/AuthProvider";
 const Login = () => {
     const { signIn, googleSignIn, resetPassword } = useContext(AuthContext)
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate()
+    const location = useLocation()
+    console.log(location);
     const handleSubmit = (e) => {
         e.preventDefault()
         const form = e.target
@@ -16,12 +19,14 @@ const Login = () => {
             .then(res => {
                 console.log(res);
                 form.reset();
+                navigate(location.state || '/')
             })
     };
     const handleGoogle = () => {
         googleSignIn()
             .then(result => {
                 console.log(result.user);
+                navigate(location.state || '/')
             })
     }
 
