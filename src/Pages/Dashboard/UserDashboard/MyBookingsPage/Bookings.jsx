@@ -1,31 +1,27 @@
-import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import useSpecificUser from "../../../../Hooks/useSpecificUser";
+import useBoooks from "./useBooks";
 
 const Bookings = () => {
-    const { specificUser } = useSpecificUser();
-    const [books, setBooks] = useState([]);
-    const axiosSecure = useAxiosSecure();
-
-    useEffect(() => {
-        if (specificUser?.userEmail) {
-            axiosSecure.get(`/books/${specificUser.userEmail}`)
-                .then(res => {
-                    setBooks(res.data);
-                })
-                .catch(error => {
-                    console.log('Error fetching books:', error);
-                });
-        }
-    }, [specificUser?.userEmail]);
-
+    const [books, loadingBooks, refetch] = useBoooks()
+    const axiosSecure = useAxiosSecure()
+    console.log(books);
     const handlePayment = (bookId) => {
         console.log("Processing payment for booking", bookId);
     };
 
     const handleCancel = (bookId) => {
         console.log("Cancelling booking", bookId);
+        axiosSecure.delete(`/books/${bookId}`)
+            .then(res => {
+                if (res.data.deletedCount >= 1) {
+                    refetch()
+                }
+            })
     };
+
+    if (loadingBooks) {
+        return <p>Loading...</p>
+    }
 
     return (
         <div className="container mx-auto p-4">
@@ -52,7 +48,7 @@ const Bookings = () => {
                                     <td className="px-4 py-2">{book.packageTitle}</td>
                                     <td className="px-4 py-2">{book.tourGuide}</td>
                                     <td className="px-4 py-2">{new Date(book.tourDate).toLocaleDateString()}</td>
-                                    <td className="px-4 py-2">₹{book.price}</td>
+                                    <td className="px-4 py-2">${book.price}</td>
                                     <td className="px-4 py-2 capitalize">{book.status}</td>
                                     <td className="px-4 py-2">
                                         {book.status === "Pending" && (

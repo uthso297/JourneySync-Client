@@ -16,9 +16,11 @@ const AssignedTour = () => {
         console.log(`Tour ${id} Rejected`);
         refetch();
     };
-
+    console.log(book);
     if (loadingBook) return <div>Loading...</div>;
-
+    if (book.length === 0) {
+        return <p className="text-center text-lg text-gray-600">You have no assigned tour yet.</p>
+    }
     return (
         <div className="container mx-auto p-4">
             <h1 className="text-2xl font-bold mb-4">Assigned Tours</h1>
