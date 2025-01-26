@@ -19,7 +19,8 @@ const PackageHome = () => {
     }, [])
 
     if (loading) {
-        return <div className="flex justify-center items-center">
+        return
+        <div className="flex justify-center items-center">
             <BallTriangle
                 height={100}
                 width={100}

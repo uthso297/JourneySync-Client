@@ -1,18 +1,22 @@
 import { useState, useContext } from "react";
-import { AuthContext } from "../../../../Components/AuthProvider";
+// import { AuthContext } from "../../../../Components/AuthProvider";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import useSpecificUser from "../../../../Hooks/useSpecificUser";
 
 const JoinGuide = () => {
-    const { user } = useContext(AuthContext);
+    // const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
+    const { specificUser, refetch } = useSpecificUser()
     const [applicationTitle, setApplicationTitle] = useState('');
     const [whyTourGuide, setWhyTourGuide] = useState('');
     const [cvLink, setCvLink] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const email = user?.email;
-
+    console.log(specificUser);
+    const email = specificUser?.userEmail;
+    const role = specificUser?.role;
+    console.log(role);
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -23,19 +27,20 @@ const JoinGuide = () => {
 
         setLoading(true);
         try {
-          
+
             const applicationData = {
                 applicationTitle,
                 userEmail: email,
                 whyTourGuide,
-                cvLink
+                cvLink,
+                role
             };
 
             const response = await axiosSecure.post('/applications', applicationData);
+            console.log(response.data);
 
             if (response.data) {
-                console.log(response.data);
-                setIsModalOpen(true); 
+                setIsModalOpen(true);
                 setApplicationTitle('');
                 setWhyTourGuide('');
                 setCvLink('');
