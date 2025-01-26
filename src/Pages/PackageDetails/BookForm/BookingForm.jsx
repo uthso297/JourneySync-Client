@@ -2,14 +2,23 @@ import { useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { CiCircleCheck } from "react-icons/ci";
+import useGuide from '../../../Hooks/useGuide';
+import { Link } from 'react-router-dom';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
-const BookingForm = ({ touristName, touristEmail, touristImage, tourGuides, price, packageTitle }) => {
+const BookingForm = ({ touristName, touristEmail, touristImage, price, packageTitle }) => {
     const [startDate, setStartDate] = useState(new Date());
     const [selectedGuide, setSelectedGuide] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const [guides] = useGuide()
+    const axiosSecure = useAxiosSecure()
+    // console.log(touristEmail);
     const handleBooking = (e) => {
         e.preventDefault();
+        // console.log(selectedGuide);
+        const selectedGuideObj = guides.find((guide) => guide.name === selectedGuide);
+        const guideEmail = selectedGuideObj ? selectedGuideObj.email : '';
+        // console.log(guideEmail);
         const status = 'Pending'
         const formData = {
             touristName,
@@ -19,10 +28,16 @@ const BookingForm = ({ touristName, touristEmail, touristImage, tourGuides, pric
             tourGuide: selectedGuide,
             price,
             status,
-            
+            guideEmail,
+            packageTitle
+
         };
         console.log('Form Data:', formData);
-        setIsModalOpen(true);
+        axiosSecure.post('/books', formData)
+            .then(res => {
+                console.log(res.data);
+                setIsModalOpen(true);
+            })    
     };
 
     const handleCloseModal = () => {
@@ -77,9 +92,9 @@ const BookingForm = ({ touristName, touristEmail, touristImage, tourGuides, pric
                         required
                     >
                         <option value="">Select a Guide</option>
-                        {/* {tourGuides.map((guide, index) => (
-                            <option key={index} value={guide}>{guide}</option>
-                        ))} */}
+                        {guides.map((guide, index) => (
+                            <option key={index} value={guide.name}>{guide.name}</option>
+                        ))}
                     </select>
                 </div>
 
@@ -112,7 +127,7 @@ const BookingForm = ({ touristName, touristEmail, touristImage, tourGuides, pric
                         <CiCircleCheck className="text-green-500 text-4xl mb-4 mx-auto" />
                         <h3 className="text-xl font-semibold text-gray-800 mb-4">Confirm Your Booking</h3>
                         <p className="text-gray-600 mb-4">Your booking details have been submitted successfully.</p>
-                        <a href="/my-bookings" className="text-blue-600 hover:underline">My Bookings</a>
+                        <Link to="/dashboard/mybookings" className="text-blue-600 hover:underline">My Bookings</Link>
                         <div className="mt-4">
                             <button
                                 onClick={handleCloseModal}

@@ -13,17 +13,16 @@ const PackageDetails = () => {
     const { _id, photos, tourInformation, tripTitle, tourPlan, price } = data
     const { user } = useContext(AuthContext)
     console.log(user);
-
     // const { displayName, email, photoURL } = user
     const userName = user?.displayName
-    const userEmail = user?.emsil
+    const userEmail = user?.email
     const userPhoto = user?.photoURL
     return (
         <>
             <Gallery photos={photos} tripTitle={tripTitle}></Gallery>
             <TourInfo tourInformation={tourInformation} tripTitle={tripTitle}></TourInfo>
             <TourPlan tourPlan={tourPlan}></TourPlan>
-            <BookingForm touristName={userName} touristEmail={userEmail} touristImage={userPhoto} price={price} packageTitle={tripTitle}></BookingForm>
+            <BookingForm touristName={userName} touristEmail={userEmail} touristImage={userPhoto} price={price} packageTitle={tripTitle} ></BookingForm>
         </>
     );
 };
