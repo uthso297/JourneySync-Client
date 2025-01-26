@@ -21,6 +21,9 @@ import AdminProfile from "../Pages/Dashboard/AdminDashboard/ManageProfile/AdminP
 import ManageCandidate from "../Pages/Dashboard/AdminDashboard/ManageCandidates/ManageCandidate";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
+import GuideProfile from "../Pages/Dashboard/GuideDashBoard/GuideProfile/GuideProfile";
+import GuideRoute from "./GuideRoute";
+import AssignedTour from "../Pages/Dashboard/GuideDashBoard/MyAssigenTour/AssignedTour";
 
 
 export const router = createBrowserRouter([
@@ -90,7 +93,7 @@ export const router = createBrowserRouter([
                 element: <JoinGuide></JoinGuide>
             },
 
-            //
+            //admin
             {
                 path: 'adminProfile',
                 element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>
@@ -98,6 +101,16 @@ export const router = createBrowserRouter([
             {
                 path: 'manageCandidates',
                 element: <ManageCandidate></ManageCandidate>
+            },
+
+            //guide
+            {
+                path: 'guideProfile',
+                element: <GuideRoute><GuideProfile></GuideProfile></GuideRoute>
+            },
+            {
+                path: 'myassignedtour',
+                element: <GuideRoute><AssignedTour></AssignedTour></GuideRoute>
             }
         ]
     }

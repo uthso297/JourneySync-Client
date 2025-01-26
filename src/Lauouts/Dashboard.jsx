@@ -2,8 +2,11 @@ import { Link, Outlet } from "react-router-dom";
 import Footer from "../Shared/Footer/Footer";
 import { motion } from "motion/react";
 import useAdmin from "../Hooks/useAdmin";
+import checkGuide from "../Hooks/checkGuide";
 const Dashboard = () => {
     const [isAdmin] = useAdmin()
+    const [isGuide] = checkGuide()
+
     return (
         <>
             <div className="flex flex-col lg:flex-row min-h-screen">
@@ -20,11 +23,24 @@ const Dashboard = () => {
                                 <li><Link to="/dashboard/manageCandidates">Manage Candidates</Link></li></>
                                 :
                                 <>
-                                    <li><Link to="/dashboard/userProfile">Manage Profile</Link></li>
-                                    <li><Link to="/dashboard/mybookings">My Bookings</Link></li>
-                                    <li><Link to="/dashboard/managestory">Manage Stories</Link></li>
-                                    <li><Link to="/dashboard/addstory">Add Stories</Link></li>
-                                    <li><Link to="/dashboard/joinguide">Join as Tour Guide</Link></li>
+                                    {
+                                        isGuide && (
+                                            <>
+                                                <li><Link to="/dashboard/guideProfile">Manage Profile</Link></li>
+                                                <li><Link to="/dashboard/myassignedtour">My Assigend Tour</Link></li>
+                                            </>
+                                        )
+                                    }
+                                    {
+                                        !isGuide && (
+                                            <>
+                                                <li><Link to="/dashboard/userProfile">Manage Profile</Link></li>
+                                                <li><Link to="/dashboard/mybookings">My Bookings</Link></li>
+                                                <li><Link to="/dashboard/managestory">Manage Stories</Link></li>
+                                                <li><Link to="/dashboard/addstory">Add Stories</Link></li>
+                                                <li><Link to="/dashboard/joinguide">Join as Tour Guide</Link></li>
+                                            </>)
+                                    }
                                 </>
                         }
                     </ul>
