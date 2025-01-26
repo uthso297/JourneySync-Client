@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import PageTitle from "../../Components/PageTitle";
 import { AuthContext } from "../../Components/AuthProvider";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
@@ -10,6 +10,8 @@ const SignUp = () => {
     const [passwordError, setPasswordError] = useState('');
     const role = 'User';
     const axiosPublic = useAxiosPublic()
+    const navigate = useNavigate()
+    const location = useLocation()
     const validatePassword = (password) => {
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/;
 
@@ -40,16 +42,19 @@ const SignUp = () => {
                             const userInfo = {
                                 userName,
                                 userEmail,
-                                role
+                                role,
+                                image
                             }
                             axiosPublic.post('/users', userInfo)
                                 .then(res => {
                                     if (res.data.insertedId) {
                                         console.log('user added');
+                                        navigate(location.state || '/')
+                                        form.reset();
                                     }
                                 })
                         })
-                    form.reset();
+
                 })
                 .catch(err => {
                     console.log(err);
@@ -62,8 +67,26 @@ const SignUp = () => {
 
     const handleGoogle = () => {
         googleSignIn()
-            .then(result => {
+            .then((result) => {
                 console.log(result.user);
+                const userName = result.user.displayName
+                const userEmail = result.user.email
+                const image = result.user.photoURL
+                const userInfo = {
+                    userName,
+                    userEmail,
+                    role,
+                    image
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.insertedId) {
+                            console.log('user added');
+                            navigate(location.state || '/')
+                            form.reset();
+                        }
+                    })
             })
     }
 

@@ -6,7 +6,7 @@ const ManageCandidate = () => {
     const [applications, loadingApplications, refetch] = useApplications();
     const axiosSecure = useAxiosSecure()
 
-    function handleAccept(email, id) {
+    function handleAccept(photo, whyGuide, name, email, id) {
         console.log("Accepted Application ID:", id, email);
         axiosSecure.patch(`/users/role/${email}`)
             .then(res => {
@@ -15,7 +15,19 @@ const ManageCandidate = () => {
                     axiosSecure.delete(`/applications/${id}`)
                         .then(res => {
                             console.log(res.data);
-                            refetch();
+                            if (res.data.deletedCount >= 1) {
+                                const guideInfo = {
+                                    name,
+                                    email,
+                                    whyGuide,
+                                    photo
+                                }
+                                axiosSecure.post('/guides', guideInfo)
+                                    .then(res => {
+                                        console.log(res.data);
+                                        refetch();
+                                    })
+                            }
                         })
                 }
             })
@@ -57,9 +69,11 @@ const ManageCandidate = () => {
                     <thead className="bg-gray-100">
                         <tr>
                             <th className="px-4 py-2 text-left">Application Title</th>
+                            <th className="px-4 py-2 text-left">Image</th>
+                            <th className="px-4 py-2 text-left">Name</th>
                             <th className="px-4 py-2 text-left">User Email</th>
+                            <th className="px-4 py-2 text-left">CV Link</th>
                             <th className="px-4 py-2 text-left">Role</th>
-                            <th className="px-4 py-2 text-left">Why Tour Guide</th>
                             <th className="px-4 py-2 text-left">Actions</th>
                         </tr>
                     </thead>
@@ -68,13 +82,15 @@ const ManageCandidate = () => {
                             applications.map((app) => (
                                 <tr key={app._id} className="border-b">
                                     <td className="px-4 py-2">{app.applicationTitle}</td>
+                                    <td className="py-2 flex justify-center items-center"> <img className="w-10 h-10 rounded-full " src={app.image} alt="" /> </td>
+                                    <td className="px-4 py-2">{app.name}</td>
                                     <td className="px-4 py-2">{app.userEmail}</td>
+                                    <td className="px-4 py-2">{app.cvLink}</td>
                                     <td className="px-4 py-2">{app.role}</td>
-                                    <td className="px-4 py-2">{app.whyTourGuide}</td>
                                     <td className="px-4 py-2">
                                         <button
                                             className="bg-green-500 text-white px-4 py-2 rounded-md mr-2"
-                                            onClick={() => handleAccept(app.userEmail, app._id)}
+                                            onClick={() => handleAccept(app.image, app.whyTourGuide, app.name, app.userEmail, app._id)}
                                         >
                                             Accept
                                         </button>

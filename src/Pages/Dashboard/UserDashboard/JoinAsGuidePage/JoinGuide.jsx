@@ -14,8 +14,10 @@ const JoinGuide = () => {
     const [loading, setLoading] = useState(false);
 
     console.log(specificUser);
+    const name = specificUser?.userName
     const email = specificUser?.userEmail;
     const role = specificUser?.role;
+    const image = specificUser?.image
     console.log(role);
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,10 +32,12 @@ const JoinGuide = () => {
 
             const applicationData = {
                 applicationTitle,
+                name,
                 userEmail: email,
                 whyTourGuide,
                 cvLink,
-                role
+                role,
+                image
             };
 
             const response = await axiosSecure.post('/applications', applicationData);

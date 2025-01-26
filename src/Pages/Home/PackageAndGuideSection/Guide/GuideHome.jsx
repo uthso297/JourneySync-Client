@@ -1,17 +1,9 @@
-import { useEffect, useState } from "react";
 import SectionTitle from "../../../../Components/SectionTitle";
-import img1 from '../../../../assets/Home/Guide/trainer1.png'
+import useGuide from '../../../../Hooks/useGuide.jsx'
 const GuideHome = () => {
-    const [guides, setGuides] = useState([]);
 
-    useEffect(() => {
-        fetch('tourGuiders.json')
-            .then(res => res.json())
-            .then(data => {
-                setGuides(data);
-            });
-    }, []);
-
+    const [guides, loading, refetch] = useGuide()
+    console.log(guides);
     return (
         <div className="bg-gray-50 py-10">
             <SectionTitle
@@ -22,16 +14,13 @@ const GuideHome = () => {
                 {guides.map((guide, index) => (
                     <div key={index} className="p-6 bg-white rounded-lg shadow-xl mx-4">
                         <div className="flex flex-col items-center">
-                            <img
-                                src={img1}
+                        <img
+                                src={guide.photo}
                                 alt={guide.name}
-                                className="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover mb-4"
+                                className="w-24 h-24 sm:w-32 sm:h-32 rounded-full mb-4"
                             />
                             <h3 className="text-xl font-semibold text-gray-800 mb-2">{guide.name}</h3>
-                            <p className="text-gray-600 mb-4">{guide.specialization}</p>
-                            <p className="text-sm text-gray-500 mb-2">{guide.languages.join(', ')}</p>
-                            <p className="text-sm text-gray-500">Experience: {guide.years_of_experience} years</p>
-                            <p className="text-sm text-gray-500">Rating: {guide.ratings} ★</p>
+                            <p className="text-sm text-gray-500">Email: {guide.email}</p>
                             <button className="btn">Details</button>
                         </div>
                     </div>

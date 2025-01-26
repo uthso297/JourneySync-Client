@@ -1,27 +1,23 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../../../Components/AuthProvider";
-import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import useSpecificUser from "../../../../Hooks/useSpecificUser";
 
 const UserProfile = () => {
-    const { user, updateUserProfile } = useContext(AuthContext);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [name, setName] = useState(user?.displayName || "");
-    const [photoURL, setPhotoURL] = useState(user?.photoURL || "");
+    const { updateUserProfile } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
+    const { specificUser, refetch } = useSpecificUser();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [name, setName] = useState("");
+    const [photoURL, setPhotoURL] = useState("");
 
-    const { data: specificUser = {}, error, refetch } = useQuery({
-        queryKey: ["specificUser"],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/users/${user?.email}`);
-            return res.data;
-        },
-    });
-
-    if (error) {
-        console.error("Error fetching user:", error.message);
-    }
+    useEffect(() => {
+        if (specificUser) {
+            setName(specificUser?.userName || "");
+            setPhotoURL(specificUser?.image || "");
+        }
+    }, [specificUser]);
 
     console.log(specificUser);
 
@@ -31,39 +27,43 @@ const UserProfile = () => {
     const handleSave = async () => {
         try {
             
-            await updateUserProfile(name, photoURL)
-                .then(async () => {             
-                    const res = await axiosSecure.patch(`/users/${user?.email}`, { username: name });
-                    if (res.status === 200) {
-                        alert("Profile updated successfully!");
-                        refetch();
-                    } else {
-                        throw new Error("Failed to update username in database");
-                    }
-                    closeModal();
-                });
+            await updateUserProfile(name, photoURL);
+
+            const res = await axiosSecure.patch(`/users/${specificUser?.userEmail}`, { username: name, userimage: photoURL });
+
+            if (res.status === 200) {
+                alert("Profile updated successfully!");
+                refetch();
+            } else {
+                throw new Error("Failed to update username in database");
+            }
+
+            closeModal();
         } catch (error) {
             console.error("Error updating profile:", error);
             alert("Failed to update profile. Please try again.");
         }
     };
 
+    if (!specificUser) {
+        return <div>Loading...</div>; 
+    }
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-100">
             {/* Welcome Message */}
-            <h1 className="text-2xl font-bold text-gray-800">Welcome, {user?.displayName}!</h1>
+            <h1 className="text-2xl font-bold text-gray-800">Welcome, {specificUser?.userName}!</h1>
 
             {/* User Information Card */}
             <div className="mt-6 w-full max-w-lg bg-white shadow-md rounded-lg p-6">
                 <div className="flex flex-col items-center">
                     <img
-                        src={user?.photoURL || "/default-avatar.png"}
+                        src={specificUser?.image || "/default-avatar.png"}
                         alt="User Avatar"
                         className="w-24 h-24 rounded-full border-4 border-gray-300"
                     />
-                    <h2 className="mt-4 text-xl font-semibold text-gray-700">{user?.displayName}</h2>
-                    <p className="text-sm text-gray-500">Email: {user?.email}</p>
+                    <h2 className="mt-4 text-xl font-semibold text-gray-700">{specificUser?.userName}</h2>
+                    <p className="text-sm text-gray-500">Email: {specificUser?.userEmail}</p>
                     <p className="mt-2 text-sm text-gray-600">Role: {specificUser?.role || "User"}</p>
 
                     <button
@@ -108,7 +108,7 @@ const UserProfile = () => {
                                 <label className="block text-sm font-medium">Email</label>
                                 <input
                                     type="email"
-                                    defaultValue={user?.email}
+                                    defaultValue={specificUser?.userEmail}
                                     disabled
                                     className="mt-1 w-full border border-gray-300 rounded px-3 py-2 bg-gray-100 cursor-not-allowed"
                                 />
