@@ -4,6 +4,7 @@ import "keen-slider/keen-slider.min.css";
 import SectionTitle from '../../../Components/SectionTitle'
 import usePackage from '../../../Hooks/usePackage'
 import { BallTriangle } from "react-loader-spinner";
+import { Link } from "react-router-dom";
 const PackagesTrips = () => {
     const [packages, loading,] = usePackage();
 
@@ -59,7 +60,9 @@ const PackagesTrips = () => {
                                 <p className="text-sm text-gray-500">{pkg.tourType}</p>
                                 <p className="text-xl font-semibold text-primary">${pkg.price}</p>
                                 <div className="card-actions justify-end">
-                                    <button className="btn btn-primary">Book Now</button>
+                                    <button className="btn btn-primary">
+                                        <Link to={`/tourPackages/${pkg._id}`}>Book Now</Link>
+                                    </button>
                                 </div>
                             </div>
                         </div>)

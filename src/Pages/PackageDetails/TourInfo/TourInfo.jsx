@@ -1,9 +1,9 @@
 import React from 'react';
 
-const TourInfo = ({ tourInformation }) => {
+const TourInfo = ({ tourInformation, tripTitle }) => {
     return (
         <div className="max-w-7xl mx-10 md:mx-auto p-6 bg-white shadow-lg rounded-lg border border-gray-200 my-10 ">
-            <h1 className="text-3xl font-semibold text-center text-gray-800 mb-4">Sundarbans Tour</h1>
+            <h1 className="text-3xl font-semibold text-center text-gray-800 mb-4">{tripTitle}</h1>
 
             {/* Overview Section */}
             <div className="mb-6">
