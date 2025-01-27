@@ -24,6 +24,8 @@ import AdminRoute from "./AdminRoute";
 import GuideProfile from "../Pages/Dashboard/GuideDashBoard/GuideProfile/GuideProfile";
 import GuideRoute from "./GuideRoute";
 import AssignedTour from "../Pages/Dashboard/GuideDashBoard/MyAssigenTour/AssignedTour";
+import GuideDetails from "../Pages/Home/TourGuideDetails/GuideDetails";
+import EditStory from "../Pages/Dashboard/EditStory";
 
 
 export const router = createBrowserRouter([
@@ -63,7 +65,12 @@ export const router = createBrowserRouter([
                     const res = await axiosPublic.get(`/tourPackages/${params.id}`);
                     return { package: res.data };
                 }
-            }
+            },
+            {
+                path: '/guidePro/:email',
+                element: <GuideDetails></GuideDetails>
+            },
+
 
         ]
     },
@@ -82,7 +89,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'managestory',
-                element: <ManageStoriesUser></ManageStoriesUser>
+                element: <ManageStoriesUser></ManageStoriesUser>,
             },
             {
                 path: 'addstory',
@@ -111,7 +118,14 @@ export const router = createBrowserRouter([
             {
                 path: 'myassignedtour',
                 element: <GuideRoute><AssignedTour></AssignedTour></GuideRoute>
+            },
+
+            //edit story
+            {
+                path: 'editstory/:id',
+                element: <EditStory></EditStory>
             }
+
         ]
     }
 ]);
