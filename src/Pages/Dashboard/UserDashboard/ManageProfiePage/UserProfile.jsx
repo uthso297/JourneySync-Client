@@ -3,6 +3,7 @@ import { AuthContext } from "../../../../Components/AuthProvider";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
 import useSpecificUser from "../../../../Hooks/useSpecificUser";
+import Swal from "sweetalert2";
 
 const UserProfile = () => {
     const { updateUserProfile } = useContext(AuthContext);
@@ -26,13 +27,17 @@ const UserProfile = () => {
 
     const handleSave = async () => {
         try {
-            
+
             await updateUserProfile(name, photoURL);
 
             const res = await axiosSecure.patch(`/users/${specificUser?.userEmail}`, { username: name, userimage: photoURL });
 
             if (res.status === 200) {
-                alert("Profile updated successfully!");
+                Swal.fire({
+                    title: "Profile updated successfully!",
+                    icon: "success",
+                    draggable: true
+                });
                 refetch();
             } else {
                 throw new Error("Failed to update username in database");
@@ -46,7 +51,7 @@ const UserProfile = () => {
     };
 
     if (!specificUser) {
-        return <div>Loading...</div>; 
+        return <div>Loading...</div>;
     }
 
     return (

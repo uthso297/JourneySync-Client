@@ -41,7 +41,6 @@ const JoinGuide = () => {
             };
 
             const response = await axiosSecure.post('/applications', applicationData);
-            console.log(response.data);
 
             if (response.data) {
                 setIsModalOpen(true);

@@ -4,6 +4,7 @@ import PageTitle from "../../Components/PageTitle";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Components/AuthProvider";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 const Login = () => {
     const { signIn, googleSignIn, resetPassword } = useContext(AuthContext)
     const axiosPublic = useAxiosPublic()
@@ -19,10 +20,23 @@ const Login = () => {
         const password = form.password.value
         console.log(email, password);
         signIn(email, password)
-            .then(res => {
-                console.log(res);
+            .then(() => {
+                Swal.fire({
+                    title: "Successfuly login",
+                    icon: "success",
+                    draggable: true
+                });
                 form.reset();
                 navigate(location.state || '/')
+            })
+            .catch(err => {
+                if (err) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Check your password!",
+                    });
+                }
             })
     };
     const handleGoogle = () => {
@@ -40,14 +54,22 @@ const Login = () => {
                 }
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
-                        console.log(res.data);
+
                         if (res.data.insertedId === null) {
-                            console.log('already');
+                            Swal.fire({
+                                title: "Successfuly login",
+                                icon: "success",
+                                draggable: true
+                            });
                             navigate(location.state || '/')
                             form.reset();
                         }
                         else if (res.data.insertedId >= 1) {
-                            console.log('user added');
+                            Swal.fire({
+                                title: "Successfuly login",
+                                icon: "success",
+                                draggable: true
+                            });
                             navigate(location.state || '/')
                             form.reset();
                         }

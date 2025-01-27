@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../../Components/AuthProvider';
 import useAxiosPublic from '../../../../Hooks/useAxiosPublic';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
+import Swal from 'sweetalert2';
 const AddStoriesUser = () => {
     const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
     const image_hosting_api = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
@@ -11,7 +12,7 @@ const AddStoriesUser = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [images, setImages] = useState([]);
-    const [uploadedImages, setUploadedImages] = useState([]);  // To hold image URLs after upload
+    const [uploadedImages, setUploadedImages] = useState([]);  
 
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
@@ -31,7 +32,6 @@ const AddStoriesUser = () => {
         console.log('Description:', description);
         console.log('Images:', images);
 
-        // Upload images to ImgBB
         const uploadedImageUrls = [];
         for (let i = 0; i < images.length; i++) {
             const imageFile = { image: images[i] };
@@ -43,18 +43,18 @@ const AddStoriesUser = () => {
                     },
                 });
                 console.log(res.data);
-                uploadedImageUrls.push(res.data.data.display_url);  // Store the image URL
+                uploadedImageUrls.push(res.data.data.display_url);  
             } catch (err) {
                 console.error('Error uploading image:', err);
             }
         }
 
-        setUploadedImages(uploadedImageUrls);  // Set the uploaded images' URLs
+        setUploadedImages(uploadedImageUrls);  
 
         const formData = {
             title,
             description,
-            images: uploadedImageUrls,  // Send URLs instead of file objects
+            images: uploadedImageUrls,  
             email: user?.email,
         };
         console.log(formData);
@@ -64,6 +64,11 @@ const AddStoriesUser = () => {
                     setTitle('')
                     setDescription('')
                     setImages([])
+                    Swal.fire({
+                        title: "Story added successfully",
+                        icon: "success",
+                        draggable: true
+                    });
                 }
             })
     };

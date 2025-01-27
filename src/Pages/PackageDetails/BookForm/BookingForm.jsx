@@ -34,10 +34,9 @@ const BookingForm = ({ touristName, touristEmail, touristImage, price, packageTi
         };
         console.log('Form Data:', formData);
         axiosSecure.post('/books', formData)
-            .then(res => {
-                console.log(res.data);
+            .then(() => {
                 setIsModalOpen(true);
-            })    
+            })
     };
 
     const handleCloseModal = () => {

@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import PageTitle from "../../Components/PageTitle";
 import { AuthContext } from "../../Components/AuthProvider";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
     const { createUser, updateUserProfile, googleSignIn } = useContext(AuthContext)
@@ -48,7 +49,11 @@ const SignUp = () => {
                             axiosPublic.post('/users', userInfo)
                                 .then(res => {
                                     if (res.data.insertedId) {
-                                        console.log('user added');
+                                        Swal.fire({
+                                            title: "Successfuly Created Your Account",
+                                            icon: "success",
+                                            draggable: true
+                                        });
                                         navigate(location.state || '/')
                                         form.reset();
                                     }
@@ -82,7 +87,11 @@ const SignUp = () => {
                     .then(res => {
                         console.log(res.data);
                         if (res.data.insertedId) {
-                            console.log('user added');
+                            Swal.fire({
+                                title: "Successfuly Created Your Account",
+                                icon: "success",
+                                draggable: true
+                            });
                             navigate(location.state || '/')
                             form.reset();
                         }
