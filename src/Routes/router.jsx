@@ -28,6 +28,7 @@ import EditStory from "../Pages/Dashboard/EditStory";
 import UserProfile from "../Pages/Dashboard/UserDashboard/ManageProfiePage/UserProfile";
 import AddPackage from "../Pages/Dashboard/AdminDashboard/AddPackage/AddPackage";
 import ManageUsers from "../Pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers";
+import Payment from "../Pages/Dashboard/Payment'/Payment";
 
 
 export const router = createBrowserRouter([
@@ -100,6 +101,10 @@ export const router = createBrowserRouter([
             {
                 path: 'joinguide',
                 element: <JoinGuide></JoinGuide>
+            },
+            {
+                path: 'payment/:id',
+                element: <Payment></Payment>
             },
 
             //admin

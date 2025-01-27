@@ -1,22 +1,43 @@
 import React, { useState } from "react";
 import useBoook from "../../../../Hooks/useBoook";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const AssignedTour = () => {
     const [book, loadingBook, refetch] = useBoook();
     const [selectedTour, setSelectedTour] = useState(null);
-
+    const axiosSecure = useAxiosSecure()
     const handleAccept = (id) => {
 
         console.log(`Tour ${id} Accepted`);
-        refetch();
+        axiosSecure.patch(`/books/accept/${id}`)
+            .then((res) => {
+                if (res.data.modifiedCount >= 0) {
+                    Swal.fire({
+                        title: "Successfuly accepted",
+                        icon: "success",
+                        draggable: true
+                    });
+                    refetch()
+                }
+            })
     };
 
     const handleReject = (id) => {
 
-        console.log(`Tour ${id} Rejected`);
-        refetch();
+        axiosSecure.patch(`/books/reject/${id}`)
+            .then((res) => {
+                if (res.data.modifiedCount >= 0) {
+                    Swal.fire({
+                        title: "Successfuly rejected",
+                        icon: "success",
+                        draggable: true
+                    });
+                    refetch()
+                }
+            })
     };
-    console.log(book);
+    // console.log(book);
     if (loadingBook) return <div>Loading...</div>;
     if (book.length === 0) {
         return <p className="text-center text-lg text-gray-600">You have no assigned tour yet.</p>
@@ -53,15 +74,16 @@ const AssignedTour = () => {
                                 <td className="px-4 py-2 capitalize">{tour.status}</td>
                                 <td className="px-4 py-2 space-x-2">
                                     <button
-                                        disabled={tour.status !== "In Review"}
+                                        disabled={tour.status === "Pending" || tour.status === "Accepted" || tour.status === "Rejected"}
                                         onClick={() => handleAccept(tour._id)}
                                         className="bg-green-500 text-white px-3 py-1 rounded disabled:opacity-50"
                                     >
                                         Accept
                                     </button>
                                     <button
+                                        disabled={tour.status === "Pending" || tour.status === "Rejected" || tour.status === "Accepted"}
                                         onClick={() => setSelectedTour(tour)}
-                                        className="bg-red-500 text-white px-3 py-1 rounded"
+                                        className="bg-red-500 text-white px-3 py-1 rounded disabled:opacity-50"
                                     >
                                         Reject
                                     </button>

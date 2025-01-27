@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Components/AuthProvider";
 import useAdmin from "../../Hooks/useAdmin";
 import checkGuide from "../../Hooks/checkGuide";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
 
@@ -13,12 +14,14 @@ const Navbar = () => {
 
     const handleLogout = () => {
         logOut()
-            .then(res => {
-                console.log(res);
+            .then(() => {
+                Swal.fire({
+                    title: "Successfuly LogOut",
+                    icon: "success",
+                    draggable: true
+                });
             })
-            .catch(err => {
-                console.log(err);
-            })
+
     }
 
     const links =

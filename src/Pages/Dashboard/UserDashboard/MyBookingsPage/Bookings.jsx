@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useBoooks from "./useBooks";
 
@@ -5,9 +6,9 @@ const Bookings = () => {
     const [books, loadingBooks, refetch] = useBoooks()
     const axiosSecure = useAxiosSecure()
     console.log(books);
-    const handlePayment = (bookId) => {
-        console.log("Processing payment for booking", bookId);
-    };
+    // const handlePayment = (bookId) => {
+    //     console.log("Processing payment for booking", bookId);
+    // };
 
     const handleCancel = (bookId) => {
         console.log("Cancelling booking", bookId);
@@ -53,12 +54,14 @@ const Bookings = () => {
                                     <td className="px-4 py-2">
                                         {book.status === "Pending" && (
                                             <div className="flex space-x-2">
-                                                <button
-                                                    onClick={() => handlePayment(book._id)}
-                                                    className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none"
-                                                >
-                                                    Pay
-                                                </button>
+                                                <Link to={`/dashboard/payment/${book._id}`}>
+                                                    <button
+                                                        // onClick={() => handlePayment(book._id)}
+                                                        className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none"
+                                                    >
+                                                        Pay
+                                                    </button>
+                                                </Link>
                                                 <button
                                                     onClick={() => handleCancel(book._id)}
                                                     className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none"

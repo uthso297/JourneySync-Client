@@ -60,9 +60,12 @@ const PackagesTrips = () => {
                                 <p className="text-sm text-gray-500">{pkg.tourType}</p>
                                 <p className="text-xl font-semibold text-primary">${pkg.price}</p>
                                 <div className="card-actions justify-end">
-                                    <button className="btn btn-primary">
-                                        <Link to={`/tourPackages/${pkg._id}`}>Book Now</Link>
-                                    </button>
+                                    <Link to={`/tourPackages/${pkg._id}`}>
+                                        <button className="btn btn-primary">
+
+                                            Book Now
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>)

@@ -28,6 +28,18 @@ const AdminProfile = () => {
         ?.filter((book) => book.status === 'Pending')
         ?.reduce((total, book) => total + parseFloat(book.price || 0), 0);
 
+    const totalInRiviewPayment = books
+        ?.filter((book) => book.status === 'In-review')
+        ?.reduce((total, book) => total + parseFloat(book.price || 0), 0);
+
+    const totalAcceptedPayment = books
+        ?.filter((book) => book.status === 'Accepted')
+        ?.reduce((total, book) => total + parseFloat(book.price || 0), 0);
+
+    const totalRjectedPayment = books
+        ?.filter((book) => book.status === 'Rejected')
+        ?.reduce((total, book) => total + parseFloat(book.price || 0), 0);
+
     // Handle modal open
     const openModal = () => {
         setAdminName(admin?.userName || '');
@@ -116,6 +128,22 @@ const AdminProfile = () => {
                     <h3 className="text-lg font-bold">Total Pending Payment</h3>
                     <p className="text-2xl font-bold text-yellow-500">$ {totalPendingPayment || 0}</p>
                 </div>
+
+                <div className="bg-white shadow-md rounded-lg p-6 text-center">
+                    <h3 className="text-lg font-bold">Total In-review Payment</h3>
+                    <p className="text-2xl font-bold text-yellow-500">$ {totalInRiviewPayment || 0}</p>
+                </div>
+
+                <div className="bg-white shadow-md rounded-lg p-6 text-center">
+                    <h3 className="text-lg font-bold">Total Payment Accepted by Guide</h3>
+                    <p className="text-2xl font-bold text-yellow-500">$ {totalAcceptedPayment || 0}</p>
+                </div>
+
+                <div className="bg-white shadow-md rounded-lg p-6 text-center">
+                    <h3 className="text-lg font-bold">Total Payment Rejected by Guide</h3>
+                    <p className="text-2xl font-bold text-yellow-500">$ {totalRjectedPayment || 0}</p>
+                </div>
+
             </div>
 
             {/* Modal for Editing Profile */}

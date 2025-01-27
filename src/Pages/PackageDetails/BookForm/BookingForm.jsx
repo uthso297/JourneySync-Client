@@ -5,21 +5,23 @@ import { CiCircleCheck } from "react-icons/ci";
 import useGuide from '../../../Hooks/useGuide';
 import { Link } from 'react-router-dom';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import useBooks from '../../Dashboard/UserDashboard/MyBookingsPage/useBooks';
+import ReactConfetti from 'react-confetti';
 
 const BookingForm = ({ touristName, touristEmail, touristImage, price, packageTitle }) => {
     const [startDate, setStartDate] = useState(new Date());
     const [selectedGuide, setSelectedGuide] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [guides] = useGuide()
-    const axiosSecure = useAxiosSecure()
-    // console.log(touristEmail);
+    const [guides] = useGuide();
+    const axiosSecure = useAxiosSecure();
+    const [books, ,refetch] = useBooks();
+    const [confettiCount, setConfettiCount] = useState(0);
+
     const handleBooking = (e) => {
         e.preventDefault();
-        // console.log(selectedGuide);
         const selectedGuideObj = guides.find((guide) => guide.name === selectedGuide);
         const guideEmail = selectedGuideObj ? selectedGuideObj.email : '';
-        // console.log(guideEmail);
-        const status = 'Pending'
+        const status = 'Pending';
         const formData = {
             touristName,
             touristEmail,
@@ -30,17 +32,25 @@ const BookingForm = ({ touristName, touristEmail, touristImage, price, packageTi
             status,
             guideEmail,
             packageTitle
-
         };
-        console.log('Form Data:', formData);
+
         axiosSecure.post('/books', formData)
             .then(() => {
+                refetch();
                 setIsModalOpen(true);
-            })
+            });
     };
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
+    };
+
+
+    const runConfetti = books.length === 3 && confettiCount < 3;
+
+
+    const handleConfettiComplete = () => {
+        setConfettiCount(prev => prev + 1);
     };
 
     return (
@@ -48,6 +58,31 @@ const BookingForm = ({ touristName, touristEmail, touristImage, price, packageTi
             onSubmit={handleBooking}
             className="max-w-7xl mx-10 md:mx-auto p-6 bg-white rounded-lg shadow-2xl space-y-6 my-10"
         >
+            {runConfetti && (
+                <div className="relative" style={{ minHeight: 200 }}>
+                    <ReactConfetti
+                        gravity={0.1}
+                        height={871}
+                        initialVelocityX={2}
+                        initialVelocityY={2}
+                        numberOfPieces={200}
+                        opacity={1}
+                        recycle={false}
+                        run={runConfetti}
+                        width={1620}
+                        wind={0}
+                        onConfettiComplete={handleConfettiComplete}
+                    />
+                    {/* Overlay message */}
+                    <div className="absolute inset-0 flex justify-center items-center text-white">
+                        <div className="text-center p-4 bg-opacity-70 bg-blue-600 rounded-lg shadow-xl">
+                            <h3 className="text-2xl font-semibold">Thanks for booking three packages!</h3>
+                            <p className="mt-2">Your support means a lot to us!</p>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <h2 className="text-2xl font-semibold text-center text-gray-800">Booking Form</h2>
 
             <div className="space-y-4">
