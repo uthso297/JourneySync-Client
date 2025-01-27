@@ -28,7 +28,6 @@ const AddPackage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Convert price to float
         const packageData = {
             ...tourData,
             price: parseFloat(tourData.price)

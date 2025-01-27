@@ -27,6 +27,7 @@ import GuideDetails from "../Pages/Home/TourGuideDetails/GuideDetails";
 import EditStory from "../Pages/Dashboard/EditStory";
 import UserProfile from "../Pages/Dashboard/UserDashboard/ManageProfiePage/UserProfile";
 import AddPackage from "../Pages/Dashboard/AdminDashboard/AddPackage/AddPackage";
+import ManageUsers from "../Pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers";
 
 
 export const router = createBrowserRouter([
@@ -113,6 +114,10 @@ export const router = createBrowserRouter([
             {
                 path: 'addPackage',
                 element: <AddPackage></AddPackage>
+            },
+            {
+                path: 'manageUsers',
+                element: <ManageUsers></ManageUsers>
             },
 
             //guide
