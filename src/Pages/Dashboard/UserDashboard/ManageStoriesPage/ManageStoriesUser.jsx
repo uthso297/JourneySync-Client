@@ -1,13 +1,20 @@
 import { Link } from "react-router-dom";
 import useSpecificStory from "../../../../Hooks/useSpecificStory";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const ManageStoriesUser = () => {
     const [specificStories, isLoading, refetch] = useSpecificStory();
     console.log(specificStories);
-
+    const axiosSecure = useAxiosSecure()
     const handleDelete = (storyId) => {
         // Logic for deleting the story (you may want to call an API or use context)
         console.log(`Deleting story with ID: ${storyId}`);
+        axiosSecure.delete(`/stories/${storyId}`)
+            .then(res => {
+                if (res.data.deletedCount >= 1) {
+                    refetch()
+                }
+            })
     };
 
     return (
