@@ -12,7 +12,6 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import PackageDetails from "../Pages/PackageDetails/PkgDetails/PackageDetails";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
-import UserProfile from "../Pages/Dashboard/UserDashboard/ManageProfiePage/userProfile";
 import Bookings from "../Pages/Dashboard/UserDashboard/MyBookingsPage/Bookings";
 import ManageStoriesUser from "../Pages/Dashboard/UserDashboard/ManageStoriesPage/ManageStoriesUser";
 import AddStoriesUser from "../Pages/Dashboard/UserDashboard/AddStoriesPage/AddStoriesUser";
@@ -26,6 +25,8 @@ import GuideRoute from "./GuideRoute";
 import AssignedTour from "../Pages/Dashboard/GuideDashBoard/MyAssigenTour/AssignedTour";
 import GuideDetails from "../Pages/Home/TourGuideDetails/GuideDetails";
 import EditStory from "../Pages/Dashboard/EditStory";
+import UserProfile from "../Pages/Dashboard/UserDashboard/ManageProfiePage/UserProfile";
+import AddPackage from "../Pages/Dashboard/AdminDashboard/AddPackage/AddPackage";
 
 
 export const router = createBrowserRouter([
@@ -109,6 +110,10 @@ export const router = createBrowserRouter([
                 path: 'manageCandidates',
                 element: <ManageCandidate></ManageCandidate>
             },
+            {
+                path: 'addPackage',
+                element: <AddPackage></AddPackage>
+            },
 
             //guide
             {
@@ -118,6 +123,14 @@ export const router = createBrowserRouter([
             {
                 path: 'myassignedtour',
                 element: <GuideRoute><AssignedTour></AssignedTour></GuideRoute>
+            },
+            {
+                path: 'managestoryGuide',
+                element: <GuideRoute> <ManageStoriesUser></ManageStoriesUser> </GuideRoute>
+            },
+            {
+                path: 'addstoryGuide',
+                element: <GuideRoute> <AddStoriesUser></AddStoriesUser> </GuideRoute>
             },
 
             //edit story

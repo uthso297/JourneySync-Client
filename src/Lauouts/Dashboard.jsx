@@ -20,7 +20,10 @@ const Dashboard = () => {
                         {
                             isAdmin ? <>
                                 <li><Link to="/dashboard/adminProfile">Manage Profile</Link></li>
-                                <li><Link to="/dashboard/manageCandidates">Manage Candidates</Link></li></>
+                                <li><Link to="/dashboard/manageCandidates">Manage Candidates</Link></li>
+                                <li><Link to="/dashboard/addPackage">Add Package</Link></li>
+                                
+                                </>
                                 :
                                 <>
                                     {
@@ -28,6 +31,8 @@ const Dashboard = () => {
                                             <>
                                                 <li><Link to="/dashboard/guideProfile">Manage Profile</Link></li>
                                                 <li><Link to="/dashboard/myassignedtour">My Assigend Tour</Link></li>
+                                                <li><Link to="/dashboard/managestoryGuide">Manage Stories</Link></li>
+                                                <li><Link to="/dashboard/addstoryGuide">Add Stories</Link></li>
                                             </>
                                         )
                                     }
