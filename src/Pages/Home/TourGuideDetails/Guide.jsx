@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const Guide = ({ email }) => {
     const [guide, setGuide] = useState([]);
-    const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic()
 
     useEffect(() => {
-        axiosSecure.get(`/guides/${email}`)
+        axiosPublic.get(`/guide/${email}`)
             .then(res => {
                 setGuide(res.data);
             });

@@ -11,7 +11,7 @@ const EditStory = () => {
     const [images, setImages] = useState([]);
     const [newImage, setNewImage] = useState("");
     const [removedImages, setRemovedImages] = useState([]);
-    const [message, setMessage] = useState(null); // Message for user feedback
+    const [message, setMessage] = useState(null); 
     const axiosSecure = useAxiosSecure();
 
     useEffect(() => {
@@ -51,7 +51,7 @@ const EditStory = () => {
                 setNewImage("");
                 setRemovedImages([]);
                 setMessage("Story updated successfully!");
-                refetch(); // Refetch the updated story data
+                refetch(); 
             }
         } catch (error) {
             console.error("Error updating story:", error);
@@ -94,6 +94,7 @@ const EditStory = () => {
 
                 <div>
                     <label htmlFor="images" className="block text-sm font-medium text-gray-700">Images</label>
+                    <p className="block text-sm font-medium text-gray-700">Click remove button to delete and then submit save changes</p>
                     <div className="space-y-2">
                         {images.map((image, index) => (
                             <div key={index} className="flex items-center space-x-4">
