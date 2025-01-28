@@ -4,9 +4,11 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const ManageUsers = () => {
     const [users, loading, refetch] = useUsers();
-    const [filteredUsers, setFilteredUsers] = useState([]); 
+    const [filteredUsers, setFilteredUsers] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedRole, setSelectedRole] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
     const axiosSecure = useAxiosSecure();
 
     useEffect(() => {
@@ -22,8 +24,22 @@ const ManageUsers = () => {
                 },
             });
             setFilteredUsers(response.data);
+            setCurrentPage(1);
         } catch (error) {
             console.error("Error fetching users:", error);
+        }
+    };
+
+
+    const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
+    const paginatedUsers = filteredUsers.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
+
+    const handlePageChange = (newPage) => {
+        if (newPage >= 1 && newPage <= totalPages) {
+            setCurrentPage(newPage);
         }
     };
 
@@ -52,7 +68,7 @@ const ManageUsers = () => {
                     <option value="">All Roles</option>
                     <option value="Admin">Admin</option>
                     <option value="Tour Guide">Tour Guide</option>
-                    <option value="User/Tourist">User/Tourist</option>
+                    <option value="User">User/Tourist</option>
                 </select>
                 <button
                     className="bg-blue-500 text-white px-4 py-2 rounded-lg"
@@ -74,7 +90,7 @@ const ManageUsers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredUsers.map((user) => (
+                        {paginatedUsers.map((user) => (
                             <tr key={user._id} className="border-b hover:bg-gray-50">
                                 <td className="px-6 py-4">
                                     <img
@@ -85,14 +101,45 @@ const ManageUsers = () => {
                                 </td>
                                 <td className="px-6 py-4">{user.userName}</td>
                                 <td className="px-6 py-4">{user.userEmail}</td>
-                                <td className="px-6 py-4">{user.role || "User/Tourist"}</td>
+                                <td className="px-6 py-4">{user.role || "User"}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+            </div>
+
+            {/* Pagination Controls */}
+            <div className="flex justify-center items-center gap-2 mt-4">
+                <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    className="px-4 py-2 bg-gray-300 rounded-lg"
+                    disabled={currentPage === 1}
+                >
+                    Previous
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => (
+                    <button
+                        key={i + 1}
+                        onClick={() => handlePageChange(i + 1)}
+                        className={`px-4 py-2 rounded-lg ${currentPage === i + 1
+                            ? "bg-blue-500 text-white"
+                            : "bg-gray-300"
+                            }`}
+                    >
+                        {i + 1}
+                    </button>
+                ))}
+                <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    className="px-4 py-2 bg-gray-300 rounded-lg"
+                    disabled={currentPage === totalPages}
+                >
+                    Next
+                </button>
             </div>
         </div>
     );
 };
 
 export default ManageUsers;
+

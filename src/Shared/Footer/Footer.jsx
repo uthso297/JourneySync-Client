@@ -1,5 +1,7 @@
 import { FacebookIcon, FacebookShareButton, TelegramIcon, TelegramShareButton, TwitterShareButton, WhatsappIcon, WhatsappShareButton, XIcon } from 'react-share';
-const shareUrl = 'https://github.com/uthso297';
+const shareUrl = 'https://www.facebook.com/share/1BK2SGrqNr/';
+const shareUrlT = 'https://t.me/uthso297'
+const shareUrlW = 'https://wa.me/1861976409'
 const Footer = () => {
     return (
         <footer className="footer bg-base-200 text-base-content p-10">
@@ -35,11 +37,11 @@ const Footer = () => {
                     <XIcon size={32} round />
                 </TwitterShareButton>
 
-                <TelegramShareButton url={shareUrl}>
+                <TelegramShareButton url={shareUrlT}>
                     <TelegramIcon size={32} round />
                 </TelegramShareButton>
 
-                <WhatsappShareButton url={shareUrl}>
+                <WhatsappShareButton url={shareUrlW}>
                     <WhatsappIcon size={32} round />
                 </WhatsappShareButton>
             </nav>

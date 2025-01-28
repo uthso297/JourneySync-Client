@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const Embark = () => {
     return (
@@ -14,8 +15,8 @@ const Embark = () => {
                         Whether you're seeking thrilling adventures, tranquil escapes, or cultural explorations, now is the perfect time to begin your journey. Get ready to step into a world of new experiences, unforgettable memories, and exciting opportunities. Your next adventure awaits — are you prepared to embark on it?
                     </p>
 
-                    <button className="btn bg-inherit my-4">Join Us Now</button>
-                    <button className="btn bg-inherit ml-5 my-4">Become a User</button>
+                    <Link to='/login'><button className="btn bg-inherit my-4">Join Us Now</button></Link>
+                    <Link to='/signup'> <button className="btn bg-inherit ml-5 my-4">Become a User</button> </Link>
                 </div>
             </div>
         </div>

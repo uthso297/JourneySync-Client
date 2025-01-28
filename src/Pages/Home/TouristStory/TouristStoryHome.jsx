@@ -7,7 +7,7 @@ import { AuthContext } from "../../../Components/AuthProvider";
 const TouristStoryHome = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();  
-    const shareUrl = 'https://github.com/uthso297'; 
+    const shareUrl = 'https://journey-sync-91305.web.app/community'; 
     
     // Handle share logic
     const handleShare = () => {

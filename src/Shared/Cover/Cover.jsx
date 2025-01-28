@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 
 const Cover = () => {
 
-    const shareUrl = 'https://github.com/uthso297';
+    const shareUrl = 'https://journey-sync-91305.web.app/';
 
     return (
         <div

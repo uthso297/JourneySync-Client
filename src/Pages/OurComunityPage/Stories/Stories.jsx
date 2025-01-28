@@ -30,7 +30,7 @@ const Stories = () => {
             <SectionTitle heading="Stories of our Travelers" description="Discover the inspiring journeys and unforgettable experiences of our travelers. Each story reflects the passion, challenges, and triumphs of those who set out to explore new horizons and embrace the world’s diverse cultures."></SectionTitle>
             <div className="container mx-auto px-4 my-10">
                 <div className="text-center mb-4">
-                    <p className="bg-blue-300 px-4 py-2 rounded w-[10%] mx-auto">All Stories</p>
+                    <p className="bg-blue-300 px-4 py-2 rounded md:w-[10%] w-[40%] mx-auto">All Stories</p>
                 </div>
                 <Swiper
                     slidesPerView={1}
