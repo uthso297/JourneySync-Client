@@ -64,7 +64,7 @@ const Login = () => {
                             navigate(location.state || '/')
                             form.reset();
                         }
-                        else if (res.data.insertedId >= 1) {
+                        else if (res.data.insertedId) {
                             Swal.fire({
                                 title: "Successfuly login",
                                 icon: "success",

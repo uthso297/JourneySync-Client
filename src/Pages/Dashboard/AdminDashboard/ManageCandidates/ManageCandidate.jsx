@@ -1,6 +1,7 @@
 import { BallTriangle } from "react-loader-spinner";
 import useApplications from "../../../../Hooks/useApplications";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const ManageCandidate = () => {
     const [applications, loadingApplications, refetch] = useApplications();
@@ -24,7 +25,13 @@ const ManageCandidate = () => {
                                 }
                                 axiosSecure.post('/guides', guideInfo)
                                     .then(res => {
-                                        console.log(res.data);
+                                        if (res.data.insertedId) {
+                                            Swal.fire({
+                                                title: "Successfuly accepted application",
+                                                icon: "success",
+                                                draggable: true
+                                            });
+                                        }
                                         refetch();
                                     })
                             }

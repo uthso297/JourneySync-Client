@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const AddPackage = () => {
     const axiosSecure = useAxiosSecure();
@@ -28,6 +29,10 @@ const AddPackage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Log data before submitting
+        // console.log("Form data before submission:", tourData);
+
         const packageData = {
             ...tourData,
             price: parseFloat(tourData.price)
@@ -35,8 +40,29 @@ const AddPackage = () => {
 
         try {
             const result = await axiosSecure.post("/tourPackages", packageData);
-            console.log("Package added successfully:", result);
-            setTourData('')
+            if (result.data.insertedId) {
+                Swal.fire({
+                    title: "Successfuly added package",
+                    icon: "success",
+                    draggable: true
+                });
+            }
+
+            // Reset the form to its initial state
+            setTourData({
+                photos: [],
+                tourType: "",
+                tripTitle: "",
+                price: "",
+                tourInformation: {
+                    overview: "",
+                    highlights: []
+                },
+                tourPlan: {
+                    day1: { activities: "" },
+                    day2: { activities: "" }
+                }
+            });
         } catch (error) {
             console.error("Error adding package:", error);
         }
