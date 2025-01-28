@@ -46,7 +46,11 @@ const UserProfile = () => {
             closeModal();
         } catch (error) {
             console.error("Error updating profile:", error);
-            alert("Failed to update profile. Please try again.");
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Error updating profile (${error})`,
+            });
         }
     };
 

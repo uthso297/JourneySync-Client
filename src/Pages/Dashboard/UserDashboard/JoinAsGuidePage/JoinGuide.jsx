@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 // import { AuthContext } from "../../../../Components/AuthProvider";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useSpecificUser from "../../../../Hooks/useSpecificUser";
+import Swal from "sweetalert2";
 
 const JoinGuide = () => {
     // const { user } = useContext(AuthContext);
@@ -23,7 +24,11 @@ const JoinGuide = () => {
         e.preventDefault();
 
         if (!applicationTitle || !whyTourGuide || !cvLink) {
-            alert('Please fill in all fields');
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Please fill in all fields!",
+            });
             return;
         }
 
@@ -49,8 +54,12 @@ const JoinGuide = () => {
                 setCvLink('');
             }
         } catch (error) {
-            console.error('Error submitting application:', error);
-            alert('There was an error submitting your application. Please try again later.');
+            
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `There is an error of ${error}`,
+            });
         } finally {
             setLoading(false);
         }

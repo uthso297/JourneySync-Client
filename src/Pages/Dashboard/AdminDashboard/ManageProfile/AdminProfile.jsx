@@ -5,6 +5,7 @@ import useStory from '../../../../Hooks/useStory';
 import useUsers from '../../../../Hooks/useUsers';
 import { AuthContext } from '../../../../Components/AuthProvider';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const AdminProfile = () => {
     const [users, loading, refetch] = useUsers();
@@ -57,7 +58,11 @@ const AdminProfile = () => {
             const res = await axiosSecure.patch(`/users/${admin?.userEmail}`, { username: adminName, userimage: adminImage });
 
             if (res.status === 200) {
-                alert("Profile updated successfully!");
+                Swal.fire({
+                    title: "Successfuly updated profile",
+                    icon: "success",
+                    draggable: true
+                });
                 refetch();
             } else {
                 throw new Error("Failed to update username in database");
@@ -65,8 +70,11 @@ const AdminProfile = () => {
 
             setIsModalOpen(false);
         } catch (error) {
-            console.log("Error updating profile:", error);
-            alert("Failed to update profile. Please try again.");
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Failed to update ${error}`,
+            });
         }
     };
 

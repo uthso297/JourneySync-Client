@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import useSpecificGuide from "../../../../Hooks/useSpecificGuide";
 import { AuthContext } from "../../../../Components/AuthProvider";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const GuideProfile = () => {
     const { updateUserProfile } = useContext(AuthContext);
@@ -44,7 +45,11 @@ const GuideProfile = () => {
             });
 
             if (guideRes.status === 200 && userRes.status === 200) {
-                alert("Guide profile updated successfully!");
+                Swal.fire({
+                    title: "Successfuly login",
+                    icon: "success",
+                    draggable: true
+                });
                 refetch();
             } else {
                 throw new Error("Failed to update guide profile in the database");
@@ -52,8 +57,11 @@ const GuideProfile = () => {
 
             closeModal();
         } catch (error) {
-            console.error("Error updating guide profile:", error);
-            alert("Failed to update guide profile. Please try again.");
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Failed to update!",
+            });
         }
     };
 
