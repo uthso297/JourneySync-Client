@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Components/AuthProvider";
 import useAdmin from "../../Hooks/useAdmin";
 import checkGuide from "../../Hooks/checkGuide";
@@ -26,12 +26,20 @@ const Navbar = () => {
 
     const links =
         <>
-            <li><Link to='/'>Home</Link></li>
-            <li>
+            {/* <li><Link to='/'>Home</Link></li> */}
+            <NavLink to="/" className={({ isActive }) => (isActive ? 'font-bold' : '')}>
+                <li>Home</li>
+            </NavLink>
+            {/* <li>
                 <Link to='/community'>Community</Link>
-            </li>
-            <li><Link to='/about'>About Us</Link></li>
-            <li><Link to="/trips">Trips</Link></li>
+            </li> */}
+            <NavLink to="/community" className={({ isActive }) => (isActive ? 'font-bold' : '')}>
+                <li>Community</li>
+            </NavLink>
+            {/* <li><Link  to='/about'>About Us</Link></li> */}
+            <NavLink className={({ isActive }) => (isActive ? 'font-bold' : '')} to='/about'>About Us</NavLink>
+            {/* <li><Link to="/trips">Trips</Link></li> */}
+            <NavLink className={({ isActive }) => (isActive ? 'font-bold' : '')} to="/trips">Trips</NavLink>
         </>
 
     const authLinks =
@@ -64,7 +72,7 @@ const Navbar = () => {
             </div>
         </>
     return (
-        <div className="navbar fixed z-10 bg-black bg-opacity-20">
+        <div className="navbar sticky top-0 z-10 bg-black">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -92,7 +100,7 @@ const Navbar = () => {
                 <a className="md:text-4xl text-xl font-bold text-white ">JourneySync</a>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1 text-white text-lg">
+                <ul className="menu menu-horizontal px-1 text-white text-lg flex items-center justify-between gap-10">
                     {
                         links
                     }

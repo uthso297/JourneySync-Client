@@ -29,12 +29,14 @@ import UserProfile from "../Pages/Dashboard/UserDashboard/ManageProfiePage/UserP
 import AddPackage from "../Pages/Dashboard/AdminDashboard/AddPackage/AddPackage";
 import ManageUsers from "../Pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers";
 import Payment from "../Pages/Dashboard/Payment'/Payment";
+import Error from "../Pages/Error/Error";
 
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
+        errorElement: <Error></Error>,
         children: [
             {
                 path: '/',
