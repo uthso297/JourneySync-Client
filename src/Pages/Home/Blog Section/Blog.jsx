@@ -5,7 +5,7 @@ const Blog = () => {
     return (
         <>
             <SectionTitle heading={'Explore Our Blog'} description={"Explore a world of stories, tips, and insights from fellow travelers. Whether you're looking for inspiration for your next adventure or practical advice on how to make the most of your travels, our blog offers a wealth of knowledge to guide your journey."}></SectionTitle>
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4 lg:p-0 lg:px-10'>
                 
                 <div className="flex flex-col gap-4 w-full">
                     <div className="skeleton w-full flex-grow">

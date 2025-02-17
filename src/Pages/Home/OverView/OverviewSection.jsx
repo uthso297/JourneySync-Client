@@ -23,7 +23,7 @@ const OverviewSection = () => {
 
     return (
         <div className='bg-[#0c0c0c] flex flex-col md:flex-row items-center gap-3'>
-            <div className='flex items-center justify-center md:ml-16 sm:ml-8'>
+            <div className='flex items-center justify-center lg:px-2 sm:ml-8'>
                 <h1 className='text-white font-bold text-4xl py-5 md:mb-20 sm:mb-12 text-center'>
                     Overview Of <br /> JourneySync
                 </h1>

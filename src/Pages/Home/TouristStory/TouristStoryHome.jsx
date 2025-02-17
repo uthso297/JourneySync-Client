@@ -22,7 +22,7 @@ const TouristStoryHome = () => {
     return (
         <div className="bg-[#0c0c0c] text-white">
             <div className="flex md:flex-row flex-col items-center justify-center">
-                <div className="md:w-1/2 space-y-5 md:pl-12 p-4 md:p-0">
+                <div className="md:w-1/2 space-y-5 lg:px-10 px-4">
                     <div>
                         <h1 className="text-4xl font-bold">Our Travelers Stories</h1>
                         <p>Hear directly from our travelers as they share their memorable experiences and life-changing moments during their journeys with us. From the breathtaking views of nature to exploring hidden gems, our stories celebrate the diverse adventures that await you. Let these inspiring tales help you plan your own unforgettable adventure</p>

@@ -4,7 +4,7 @@ import PackageHome from '../Package/PackageHome';
 import GuideHome from '../Guide/GuideHome';
 const PackageGuideHome = () => {
     return (
-        <div className='my-10'>
+        <div className='my-10 px-10'>
             <Tabs>
                 <TabList>
                     <Tab>Our Packages</Tab>
