@@ -6,6 +6,16 @@ import useUsers from '../../../../Hooks/useUsers';
 import { AuthContext } from '../../../../Components/AuthProvider';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import {
+    ResponsiveContainer,
+    ComposedChart,
+    Bar,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    Legend,
+} from 'recharts';
 
 const AdminProfile = () => {
     const [users, loading, refetch] = useUsers();
@@ -47,6 +57,25 @@ const AdminProfile = () => {
         setAdminImage(admin?.image || '');
         setIsModalOpen(true);
     };
+
+    const chartData = [
+        {
+            product_title: 'Pending Payment',
+            price: totalPendingPayment || 0,
+        },
+        {
+            product_title: 'In-review Payment',
+            price: totalInRiviewPayment || 0,
+        },
+        {
+            product_title: 'Accepted Payment',
+            price: totalAcceptedPayment || 0,
+        },
+        {
+            product_title: 'Rejected Payment',
+            price: totalRjectedPayment || 0,
+        }
+    ];
 
 
     const handleSubmit = async (e) => {
@@ -152,6 +181,32 @@ const AdminProfile = () => {
                     <p className="text-2xl font-bold text-yellow-500">$ {totalRjectedPayment || 0}</p>
                 </div>
 
+            </div>
+
+            {/* recharts */}
+            <div className='my-10'>
+                <div style={{ width: '100%', height: 400 }}>
+                    <ResponsiveContainer>
+                        <ComposedChart
+                            width={500}
+                            height={400}
+                            data={chartData}
+                            margin={{
+                                top: 20,
+                                right: 20,
+                                bottom: 20,
+                                left: 20,
+                            }}
+                        >
+                            <CartesianGrid stroke="#f5f5f5" />
+                            <XAxis dataKey="product_title" tick={{ fontSize: 12 }} />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="price" barSize={20} fill="#413ea0" />
+                        </ComposedChart>
+                    </ResponsiveContainer>
+                </div>
             </div>
 
             {/* Modal for Editing Profile */}
