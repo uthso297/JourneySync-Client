@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useBoook from "../../../../Hooks/useBoook";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { BallTriangle } from "react-loader-spinner";
 
 const AssignedTour = () => {
     const [book, loadingBook, refetch] = useBoook();
@@ -38,7 +39,18 @@ const AssignedTour = () => {
             })
     };
     // console.log(book);
-    if (loadingBook) return <div>Loading...</div>;
+    if (loadingBook) return <div className="flex justify-center">
+                <BallTriangle
+                    height={100}
+                    width={100}
+                    radius={5}
+                    color="#4fa94d"
+                    ariaLabel="ball-triangle-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                />
+            </div>;
     if (book.length === 0) {
         return <p className="text-center text-lg text-gray-600">You have no assigned tour yet.</p>
     }

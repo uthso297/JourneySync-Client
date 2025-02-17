@@ -84,7 +84,7 @@ const GuideProfile = () => {
                     />
                     <h2 className="mt-4 text-xl font-semibold text-gray-700">{specificGuide?.name}</h2>
                     <p className="text-sm text-gray-500">Email: {specificGuide?.email}</p>
-                    <p className="mt-2 text-sm text-gray-600">Reason: {specificGuide?.whyGuide}</p>
+                    <p className="mt-2 text-sm text-gray-600">{specificGuide?.whyGuide}</p>
 
                     <button
                         className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import useSpecificStory from "../../../../Hooks/useSpecificStory";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { BallTriangle } from "react-loader-spinner";
 
 const ManageStoriesUser = () => {
     const [specificStories, isLoading, refetch] = useSpecificStory();
@@ -23,9 +24,24 @@ const ManageStoriesUser = () => {
 
             {/* Loading state */}
             {isLoading ? (
-                <div className="text-center text-xl text-gray-500">Loading...</div>
+                <div className="flex justify-center">
+                    <BallTriangle
+                        height={100}
+                        width={100}
+                        radius={5}
+                        color="#4fa94d"
+                        ariaLabel="ball-triangle-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                    />
+                </div>
             ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                specificStories.length === 0 ? (<>
+
+                    <p className="text-center font-bold text-xl">You have not added any story yet</p>
+                </>) : (<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {/* Iterate over the stories */}
                     {specificStories?.map((story) => (
                         <div
@@ -72,7 +88,9 @@ const ManageStoriesUser = () => {
                             </div>
                         </div>
                     ))}
-                </div>
+                </div>)
+
+
             )}
         </div>
     );
