@@ -1,6 +1,7 @@
 import { FacebookIcon, FacebookShareButton, TelegramIcon, TelegramShareButton, TwitterShareButton, WhatsappIcon, WhatsappShareButton, XIcon } from 'react-share';
 import coverImg from '../../assets/Home/banner.jpg';
 import { motion } from "motion/react";
+import { Link } from 'react-router-dom';
 
 const Cover = () => {
 
@@ -27,14 +28,16 @@ const Cover = () => {
 
                     <div className="flex ">
                         {/* flex-col sm:flex-row gap-3 items-center justify-center sm:justify-start */}
-                        <motion.button
-                            initial={{ opacity: 0.2 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.5, duration: 3, ease: "easeOut" }}
-                            className="btn btn-sm bg-inherit  sm:btn-md lg:btn-lg text-white"
-                        >
-                            Get Started
-                        </motion.button>
+                        <Link to='/trips'>
+                            <motion.button
+                                initial={{ opacity: 0.2 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.5, duration: 3, ease: "easeOut" }}
+                                className="btn btn-sm bg-inherit  sm:btn-md lg:btn-lg text-white"
+                            >
+                                Get Started
+                            </motion.button>
+                        </Link>
                         <motion.h1
                             animate={{ y: ["-100vh", 0] }}
                             transition={{ duration: 3, ease: "easeOut" }}
