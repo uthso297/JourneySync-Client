@@ -2,6 +2,7 @@ import PageTitle from "../../../Components/PageTitle";
 import Cover from "../../../Shared/Cover/Cover";
 import Blog from "../Blog Section/Blog";
 import Embark from "../EmbarkJourneySection/Embark";
+import Newsletter from "../NewsLetter/Newsletter";
 import OverviewSection from "../OverView/OverviewSection";
 import PackageGuideHome from "../PackageAndGuideSection/PackageAndGuide/PackageGuideHome";
 import TouristStoryHome from "../TouristStory/TouristStoryHome";
@@ -16,6 +17,7 @@ const Home = () => {
             <TouristStoryHome></TouristStoryHome>
             <Blog></Blog>
             <Embark></Embark>
+            <Newsletter></Newsletter>
         </div>
     );
 };

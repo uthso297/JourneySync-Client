@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Embark = () => {
     return (
         <div
-            className="hero min-h-screen lg:my-5"
+            className="hero min-h-screen mt-5"
             style={{
                 backgroundImage: "url(https://t3.ftcdn.net/jpg/03/04/88/18/360_F_304881889_yJ1S3butl9gVs0kMptYTU2N1EVmEJbz8.jpg)",
             }}>

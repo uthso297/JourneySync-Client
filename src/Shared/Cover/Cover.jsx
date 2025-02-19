@@ -17,7 +17,7 @@ const Cover = () => {
 
     const handleThemeToggle = () => {
         setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-        window.location.reload(true)
+        window.location.reload()
     };
 
     return (

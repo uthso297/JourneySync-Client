@@ -45,8 +45,10 @@ const Navbar = () => {
     const authLinks =
         <>
 
-            <li className="text-sm md:text-lg"><Link to="/login">Login</Link></li>
-            <li className="text-sm md:text-lg"><Link to="/signup">Register</Link></li>
+            {/* <li className="text-sm md:text-lg"><Link to="/login">Login</Link></li> */}
+            <NavLink className={({ isActive }) => (isActive ? 'font-bold' : '')} to='/login'> <li className="text-sm md:text-lg">Login</li> </NavLink>
+            <NavLink className={({ isActive }) => (isActive ? 'font-bold' : '')} to='/signup'> <li className="text-sm md:text-lg">Register</li> </NavLink>
+            {/* <li className="text-sm md:text-lg"><Link to="/signup">Register</Link></li> */}
 
         </>
 
@@ -97,7 +99,7 @@ const Navbar = () => {
                         }
                     </ul>
                 </div>
-                <a className="md:text-4xl text-xl font-bold text-white ">JourneySync</a>
+                <a href="/" className="md:text-4xl text-xl font-bold text-white ">JourneySync</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 text-white text-lg flex items-center justify-between gap-10">
