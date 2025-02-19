@@ -6,18 +6,18 @@ import { AuthContext } from "../../../Components/AuthProvider";
 
 const TouristStoryHome = () => {
     const { user } = useContext(AuthContext);
-    const navigate = useNavigate();  
-    const shareUrl = 'https://journey-sync-91305.web.app/community'; 
-    
+    const navigate = useNavigate();
+    const shareUrl = 'https://journey-sync-91305.web.app/community';
+
     // Handle share logic
     const handleShare = () => {
         if (!user) {
-            
+
             navigate('/login');
         }
     };
 
-    const share = user ? shareUrl : null; 
+    const share = user ? shareUrl : null;
 
     return (
         <div className="bg-[#0c0c0c] text-white">
@@ -31,11 +31,13 @@ const TouristStoryHome = () => {
                         <Link to='/community'>
                             <button className="btn">All Stories</button>
                         </Link>
-                        <button className="btn">Add Story</button>
+                        <Link to='/dashboard/addstory'>
+                            <button className="btn">Add Story</button>
+                        </Link>
                     </div>
                     <div className="flex gap-3 items-center">
                         <h1>Share it on Facebook!</h1>
-                        
+
                         {user ? (
                             <FacebookShareButton url={shareUrl}>
                                 <FacebookIcon size={32} round />
