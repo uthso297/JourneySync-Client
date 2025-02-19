@@ -2,7 +2,7 @@ import SectionTitle from '../../../Components/SectionTitle'
 const Gallery = ({ photos, tripTitle }) => {
     return (
         <>
-            <div className='pt-10 bg-gray-300 shadow-lg'><SectionTitle heading="Our Gallery" description="Explore latest images"></SectionTitle></div>
+            <div className='pt-10 shadow-lg'><SectionTitle heading="Our Gallery" description="Explore latest images"></SectionTitle></div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
                 {photos.map((photo, index) => (
                     <div

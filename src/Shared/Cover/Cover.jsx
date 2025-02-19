@@ -2,10 +2,23 @@ import { FacebookIcon, FacebookShareButton, TelegramIcon, TelegramShareButton, T
 import coverImg from '../../assets/Home/banner.jpg';
 import { motion } from "motion/react";
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const Cover = () => {
 
     const shareUrl = 'https://journey-sync-91305.web.app/';
+
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+    useEffect(() => {
+        localStorage.setItem("theme", theme);
+        document.documentElement.setAttribute("data-theme", theme);
+    }, [theme]);
+
+    const handleThemeToggle = () => {
+        setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+        window.location.reload(true)
+    };
 
     return (
         <div
@@ -63,6 +76,7 @@ const Cover = () => {
                 transition={{ delay: 0.5, duration: 3, ease: "easeOut" }}
                 className="flex sm:flex-col gap-5 absolute sm:right-5 sm:bottom-[40vh] bottom-10 sm:left-auto sm:w-auto"
             >
+
                 <FacebookShareButton url={shareUrl}>
                     <FacebookIcon size={32} round />
                 </FacebookShareButton>
@@ -78,7 +92,22 @@ const Cover = () => {
                 <WhatsappShareButton url={shareUrl}>
                     <WhatsappIcon size={32} round />
                 </WhatsappShareButton>
+
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5, duration: 3, ease: "easeOut" }}
+                    className=""
+                >
+                    <button
+                        onClick={handleThemeToggle}
+                        className="bg-gray-700 text-white p-2 rounded-full"
+                    >
+                        {theme === 'light' ? '🌙' : '🌞'}
+                    </button>
+                </motion.div>
             </motion.div>
+
         </div>
     );
 };

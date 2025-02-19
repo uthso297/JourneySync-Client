@@ -9,6 +9,7 @@ const PackageHome = () => {
     const [packages, setPackages] = useState([])
     const [loading, setLoading] = useState(true)
     const axiosPublic = useAxiosPublic();
+
     useEffect(() => {
 
         axiosPublic.get('/tourPackages/random')
@@ -34,7 +35,6 @@ const PackageHome = () => {
             </div>
         );
     }
-
 
     return (
         <div>

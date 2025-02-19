@@ -4,7 +4,7 @@ import useGuide from '../../../../Hooks/useGuide.jsx'
 const GuideHome = () => {
 
     const [guides, loading, refetch] = useGuide()
-    console.log(guides);
+    // console.log(guides);
     return (
         <div className="py-10">
             <SectionTitle
