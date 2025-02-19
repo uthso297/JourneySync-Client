@@ -9,6 +9,7 @@ const Login = () => {
     const { signIn, googleSignIn, resetPassword } = useContext(AuthContext)
     const axiosPublic = useAxiosPublic()
     const [isOpen, setIsOpen] = useState(false);
+    const [showCredetial, setShowCredetial] = useState(false);
     const navigate = useNavigate()
     const location = useLocation()
     console.log(location);
@@ -117,6 +118,16 @@ const Login = () => {
                     <div className="flex-grow border-t border-gray-300"></div>
                     <span className="mx-4 text-gray-500">or</span>
                     <div className="flex-grow border-t border-gray-300"></div>
+                </div>
+                <div className="mb-5">
+                    <button onClick={() => setShowCredetial(!showCredetial)} className="btn bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">Click To See Admin Credetials</button>
+                    {
+                        showCredetial && <>
+                            <p>Admin Email: admin@admin.com</p>
+                            <p>Admin Password: Abc@123</p>
+
+                        </>
+                    }
                 </div>
                 <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
                     <input
